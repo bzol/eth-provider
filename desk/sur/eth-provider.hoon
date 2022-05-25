@@ -40,7 +40,7 @@
       :: others to mirror?
   ==
 
-+$  update
-  $%  [%get-state =mode]
-  ==
+:: +$  update
+::   $%  [%get-state =mode]
+::   ==
 --
