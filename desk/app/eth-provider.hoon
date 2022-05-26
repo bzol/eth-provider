@@ -53,15 +53,19 @@
           mode  [%local +.action]
           ==
       ~
-        :: %get-state
-      :: [~ state]
     ==
   --
 ::
 :: ++  on-poke  on-poke:def
 ++  on-watch  on-watch:def
 ++  on-leave  on-leave:def
-++  on-peek   on-peek:def
+++  on-peek   
+  |=  =path
+  ^-  (unit (unit cage))
+  ?+    path  (on-peek:def path)
+      [%x %get-mode ~]  
+    ``noun+!>(mode)
+  ==
 ++  on-agent  on-agent:def
 ++  on-arvo   on-arvo:def
 ++  on-fail   on-fail:def

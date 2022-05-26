@@ -1,5 +1,5 @@
 /-  spider, eth-provider
-/+  *strandio, ethio, ethereum
+/+  strandio, ethio, ethereum
 =,  strand=strand:spider
 =,  dejs-soft:format
 =,  strand-fail=strand-fail:libstrand:spider
@@ -11,11 +11,15 @@
 =/  address  0x1d54.e0b2.8269.645e.75b1.1baa.9845.d8b0.c6ea.4147
 =/  url  'http://localhost:8545'
 :: =/  address  !<  (unit @ux)  arg
+;<  mode=mode:eth-provider  bind:m  (scry:strandio mode:eth-provider /gx/eth-provider/get-mode/noun)
+~&  mode
 
 :: (get-balance:ethio url address)
 :: =/  balance  (get-balance:ethio url address)
 ;<  test=*  bind:m  (get-balance:ethio url address)
 ~&  test
+~&  '=============='
+~&  arg
 :: ~&  json
 
 :: =*  bad-arg  (pure:m arg)

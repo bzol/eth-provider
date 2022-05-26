@@ -25,7 +25,6 @@
   $%  [%set-local =local]
       :: [%set-provider =provider]
       :: [%set-client =client]
-      :: [%get-state =mode]
 
       :: [%get-balance =address]
       :: [%request-rpc]
@@ -39,8 +38,21 @@
 
       :: others to mirror?
   ==
-
 :: +$  update
 ::   $%  [%get-state =mode]
 ::   ==
+
+:: for starting a thread
++$  ethio
+  $%  [%get-balance =address]
+
+      :: [%get-balance =address]
+      :: [%request-rpc]
+      :: [%request-batch-rpc-strict]
+      :: [%request-batch-rpc-loose]
+      :: [%read-contract]
+      :: [%batch-read-contract-strict reqs=(list proto-read-request:rpc:ethereum)]
+      :: [%batch-read-contract-loose]
+      :: [%read-loose]
+  ==
 --
