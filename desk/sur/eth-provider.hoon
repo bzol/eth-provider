@@ -14,17 +14,19 @@
 +$  client
   $:  provider=@p
   ==
++$  active  ?(%local %provider %client)
 
-+$  mode
-  $%  [%local =local]
-      [%provider =provider]
-      [%client =client]
++$  state
+  $:  =active
+      =local
+      =provider
+      =client
   ==
 
 +$  action
   $%  [%set-local =local]
-      :: [%set-provider =provider]
-      :: [%set-client =client]
+      [%set-provider =provider]
+      [%set-client =client]
 
       :: [%get-balance =address]
       :: [%request-rpc]

@@ -45,8 +45,8 @@
       =/  ta-now  `@ta`(scot %da now.bowl)
       :_  this
       :~
-          [%pass /thread/[ta-now] %agent [our.bowl %spider] %poke %spider-start !>(start-args)]
           [%pass /thread/[ta-now] %agent [our.bowl %spider] %watch /thread-result/[tid]]
+          [%pass /thread/[ta-now] %agent [our.bowl %spider] %poke %spider-start !>(start-args)]
       ==
     :: [~ this]
   ==
@@ -91,7 +91,7 @@
          %-  (slog leaf+"Thread failed: {(trip p.err)}" q.err)
          `this
            %thread-done
-         =/  res  !<(@ux q.cage.sign)
+         =/  res  !<(@ud q.cage.sign)
          ~&  res
          `this
        ==

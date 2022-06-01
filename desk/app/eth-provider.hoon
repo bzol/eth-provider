@@ -4,7 +4,13 @@
 +$  versioned-state
   $%  state-0
   ==
-+$  state-0  [%0 =mode:eth-provider]
++$  state-0  
+  $:  %0
+      active=active:eth-provider
+      local=local:eth-provider
+      provider=provider:eth-provider
+      client=client:eth-provider
+  ==
 +$  card  card:agent:gall
 --
 %-  agent:dbug
@@ -18,7 +24,9 @@
 ::
 ++  on-init
   ^-  (quip card _this)
-  `this
+  =/  init-state  [%0 %local 'http://localhost:8545' ['http://localhost:8545' %.n ~] ~zod]
+  :-  ~
+  this(state init-state)
 ::
 ++  on-save
   ^-  vase
@@ -49,8 +57,23 @@
     ?-    -.action
         %set-local
       ~&  +.action
-      :_  %=  state  
-          mode  [%local +.action]
+      :_  %=  state
+          active  %local
+          local  +.action
+          ==
+      ~
+        %set-provider
+      ~&  +.action
+      :_  %=  state
+          active  %provider
+          provider  +.action
+          ==
+      ~
+        %set-client
+      ~&  +.action
+      :_  %=  state
+          active  %client
+          client  +.action
           ==
       ~
     ==
@@ -61,10 +84,12 @@
 ++  on-leave  on-leave:def
 ++  on-peek   
   |=  =path
+  ~&  'on-peek called!'
   ^-  (unit (unit cage))
   ?+    path  (on-peek:def path)
-      [%x %get-mode ~]  
-    ``noun+!>(mode)
+      [%x %get-state ~]  
+    ~&  +.state
+    ``noun+!>(+.state)
   ==
 ++  on-agent  on-agent:def
 ++  on-arvo   on-arvo:def
