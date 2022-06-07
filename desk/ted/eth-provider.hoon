@@ -10,22 +10,30 @@
 ^-  form:m
 ::
 =/  url  'http://localhost:8545'
-~&  'eth-provider called!'
+~&  'thread called!'
 
-=/  arg2  !<(ethio:eth-provider arg)
+=/  eth-input  !<(ethin:eth-provider arg)
+;<  =bowl:spider  bind:m  get-bowl:strandio
+:: =/  ship  !<(@p +<.arg)
+:: =/  tid  !<(@ta +>.arg)
+
 ;<    state=state:eth-provider
     bind:m
   (scry:strandio state:eth-provider /gx/eth-provider/get-state/noun)
 ?-  active.state
   %local
-(call-ethio arg2 url.local.state)
+(call-ethio eth-input active.state url.local.state)
   %provider
-(call-ethio arg2 url.provider.state)
+(call-ethio eth-input active.state url.provider.state)
   %client
-;<  =bowl:spider  bind:m  get-bowl:strandio
-;<  tid=tid:spider   bind:m  
-  (start-thread-with-args:strandio [[~nut %base da+now.bowl] %eth-provider arg])
-(pure:m !>(195))
+~&  'client branch taken'
+;<  ~  bind:m  (poke:strandio [provider.client.state %eth-provider] [%provider-action !>([%provide tid.bowl eth-input])])
+~&  'client branch taken2'
+;<  vmsg=vase   bind:m  (take-poke:strandio %noun)
+~&  'vmsg console message'
+~&  vmsg
+~&  '===================='
+(pure:m vmsg)
 ==
 ::
 |%
@@ -35,14 +43,29 @@
       provider=provider:eth-provider
       client=client:eth-provider
   ==
+++  is-client
+  |=  [tid=@tatid active=active:eth-provider eth-output=ethout:eth-provider]
+  =/  m  (strand ,vase)
+  :: (pure:m !>([tid eth-output]))
+  ?-  active
+    %local
+  (pure:m !>(eth-output))
+    %provider
+  (pure:m !>([tid eth-output]))
+    %client
+  (pure:m !>(eth-output))
+  ==
 ++  call-ethio
-  |=  [arg=ethio:eth-provider url=@ta]
+  |=  [arg=ethin:eth-provider active=active:eth-provider url=@ta]
   ~&  'call-ethio called!'
   =/  m  (strand ,vase)
+  ;<  =bowl:spider  bind:m  get-bowl:strandio
   ?-  -.arg
     %get-balance
   =/  address  +.arg
+  :: (if tid.ship equals current ship, just return balance)
   ;<  balance=@ud  bind:m  (get-balance:ethio url address)
-  (pure:m !>(balance))
+  :: (pure:m !>([tid.bowl balance]))
+  (is-client tid.bowl active balance)
   ==
 --

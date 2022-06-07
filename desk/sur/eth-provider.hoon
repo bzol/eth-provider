@@ -27,6 +27,7 @@
   $%  [%set-local =local]
       [%set-provider =provider]
       [%set-client =client]
+      [%provide tid=@ta =ethin]
 
       :: [%get-balance =address]
       :: [%request-rpc]
@@ -45,10 +46,8 @@
 ::   ==
 
 :: for starting a thread
-+$  ethio
++$  ethin
   $%  [%get-balance =address]
-
-      :: [%get-balance =address]
       :: [%request-rpc]
       :: [%request-batch-rpc-strict]
       :: [%request-batch-rpc-loose]
@@ -56,5 +55,8 @@
       :: [%batch-read-contract-strict reqs=(list proto-read-request:rpc:ethereum)]
       :: [%batch-read-contract-loose]
       :: [%read-loose]
+  ==
++$  ethout
+  $?  [balance=@ud]
   ==
 --
