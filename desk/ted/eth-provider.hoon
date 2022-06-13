@@ -61,11 +61,15 @@
   =/  m  (strand ,vase)
   ;<  =bowl:spider  bind:m  get-bowl:strandio
   ?-  -.arg
+    %request-rpc
+  =/  arg2  +.arg
+  ~&  arg2
+  ;<  out=*  bind:m  (request-rpc:ethio url arg2)
+  (is-client tid.bowl active out)
+
     %get-balance
   =/  address  +.arg
-  :: (if tid.ship equals current ship, just return balance)
   ;<  balance=@ud  bind:m  (get-balance:ethio url address)
-  :: (pure:m !>([tid.bowl balance]))
-  (is-client tid.bowl active balance)
+  (is-client tid.bowl active 123)
   ==
 --

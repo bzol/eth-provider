@@ -39,9 +39,13 @@
   ?>  =(src.bowl our.bowl)
   ?+    mark  (on-poke:def mark vase)
       %start-eth-action
-    =/  address  0x1d54.e0b2.8269.645e.75b1.1baa.9845.d8b0.c6ea.4147
+    0x1d54.e0b2.8269.645e.75b1.1baa.9845.d8b0.c6ea.4147
     =/  tid  `@ta`(cat 3 'thread_' (scot %uv (sham eny.bowl)))
-    =/  start-args  [~ `tid byk.bowl(r da+now.bowl) %eth-provider !>([%get-balance address])]
+
+    =/  request-rpc  [%request-rpc [~ 'u_tid'] [%eth-block-number ~]]
+    =/  get-balance  [%get-balance 0x1d54.e0b2.8269.645e.75b1.1baa.9845.d8b0.c6ea.4147]
+
+    =/  start-args  [~ `tid byk.bowl(r da+now.bowl) %eth-provider !>(get-balance)]
     =/  ta-now  `@ta`(scot %da now.bowl)
     :_  this
     :~

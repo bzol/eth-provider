@@ -137,9 +137,9 @@
          =/  ship  `@p`+.ship-num
          =/  ta-now  `@ta`(scot %da now.bowl)
          =/  eth-output  +.res
-         ~&  "eth-output============"
+         ~&  "eth-output==========="
          ~&  eth-output
-         ~&  "======================"
+         ~&  "====================="
          :-  
          :~
          :: [%pass /thread/[ta-now] %agent [ship %spider] %poke %spider-input !>([tid %noun !>(eth-output)])]
