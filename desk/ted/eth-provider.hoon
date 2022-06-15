@@ -62,14 +62,40 @@
   ;<  =bowl:spider  bind:m  get-bowl:strandio
   ?-  -.arg
     %request-rpc
-  =/  arg2  +.arg
-  ~&  arg2
-  ;<  out=*  bind:m  (request-rpc:ethio url arg2)
+  ;<  out=*  bind:m  (request-rpc:ethio url +.arg)
   (is-client tid.bowl active out)
-
+    %request-batch-rpc-strict
+  ;<  out=*  bind:m  (request-batch-rpc-strict:ethio url +.arg)
+  (is-client tid.bowl active out)
+    %request-batch-rpc-loose
+  ;<  out=*  bind:m  (request-batch-rpc-loose:ethio url +.arg)
+  (is-client tid.bowl active out)
+    %read-contract
+  ;<  out=*  bind:m  (read-contract:ethio url +.arg)
+  (is-client tid.bowl active out)
+    %batch-read-contract-strict
+  ;<  out=*  bind:m  (batch-read-contract-strict:ethio url +.arg)
+  (is-client tid.bowl active out)
+    %get-latest-block
+  ;<  out=*  bind:m  (get-latest-block:ethio url)
+  (is-client tid.bowl active out)
+    %get-block-by-number
+  ;<  out=*  bind:m  (get-block-by-number:ethio url +.arg)
+  (is-client tid.bowl active out)
+    %get-tx-by-hash
+  ;<  out=*  bind:m  (get-tx-by-hash:ethio url +.arg)
+  (is-client tid.bowl active out)
+    %get-logs-by-hash
+  ;<  out=*  bind:m  (get-logs-by-hash:ethio url +.arg)
+  (is-client tid.bowl active out)
+    %get-logs-by-range
+  ;<  out=*  bind:m  (get-logs-by-range:ethio url +.arg)
+  (is-client tid.bowl active out)
+    %get-next-nonce
+  ;<  out=*  bind:m  (get-next-nonce:ethio url +.arg)
+  (is-client tid.bowl active out)
     %get-balance
-  =/  address  +.arg
-  ;<  balance=@ud  bind:m  (get-balance:ethio url address)
-  (is-client tid.bowl active 123)
+  ;<  out=*  bind:m  (get-balance:ethio url +.arg)
+  (is-client tid.bowl active out)
   ==
 --

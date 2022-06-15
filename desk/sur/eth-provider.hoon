@@ -39,16 +39,16 @@
 +$  ethin
   $%  
       [%request-rpc id=(unit @t) req=request:rpc:ethereum]
-      :: [%request-batch-rpc-strict reqs=(list id=(unit @t) req=request:rpc:ethereum)]
-      :: [%request-batch-rpc-loose reqs=(list id=(unit @t) req=request:rpc:ethereum)]
-      :: [%read-contract req=proto-read-request:rpc:ethereum]
-      :: [%batch-read-contract-strict reqs=(list proto-read-request:rpc:ethereum)]
-      :: [%get-latest-block]
-      :: [%get-block-by-number =number:block]
-      :: [%get-tx-by-hash tx-hash=@ux]
-      :: [%get-logs-by-hash =hash:block contracts=(list address) =topics]
-      :: [%get-logs-by-range contracts=(list address) =topics =from=number:block =to=number:block]
-      :: [%get-next-nonce =address]
+      [%request-batch-rpc-strict reqs=(list [id=(unit @t) req=request:rpc:ethereum])]
+      [%request-batch-rpc-loose reqs=(list [id=(unit @t) req=request:rpc:ethereum])]
+      [%read-contract req=proto-read-request:rpc:ethereum]
+      [%batch-read-contract-strict reqs=(list proto-read-request:rpc:ethereum)]
+      [%get-latest-block foo=?]
+      [%get-block-by-number =number:block]
+      [%get-tx-by-hash tx-hash=@ux]
+      [%get-logs-by-hash =hash:block contracts=(list address) =topics]
+      [%get-logs-by-range contracts=(list address) =topics =from=number:block =to=number:block]
+      [%get-next-nonce =address]
       [%get-balance =address]
   ==
 +$  ethout

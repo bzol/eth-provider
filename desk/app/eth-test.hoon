@@ -39,13 +39,22 @@
   ?>  =(src.bowl our.bowl)
   ?+    mark  (on-poke:def mark vase)
       %start-eth-action
-    0x1d54.e0b2.8269.645e.75b1.1baa.9845.d8b0.c6ea.4147
     =/  tid  `@ta`(cat 3 'thread_' (scot %uv (sham eny.bowl)))
+    =/  address  0x1d54.e0b2.8269.645e.75b1.1baa.9845.d8b0.c6ea.4147
 
     =/  request-rpc  [%request-rpc [~ 'u_tid'] [%eth-block-number ~]]
-    =/  get-balance  [%get-balance 0x1d54.e0b2.8269.645e.75b1.1baa.9845.d8b0.c6ea.4147]
+    =/  request-batch-rpc-strict  [%request-batch-rpc-strict ~[+.request-rpc]]
+    =/  request-batch-rpc-loose  [%request-batch-rpc-loose ~[+.request-rpc]]
+    =/  read-contract  [%read-contract [[~ 'unitid'] address ['func' ~[[%address address]]]]]
+    =/  batch-read-contract-strict  [%batch-read-contract-strict ~[+.request-rpc]]
+    =/  get-latest-block  [%get-latest-block %.n]
+    =/  get-block-by-number  [%get-block-by-number 123]
+    =/  get-tx-by-hash  [%get-tx-by-hash address]
+    :: =/  get-logs-by-hash  [%get-logs-by-hash address]
+    =/  get-next-nonce  [%get-next-nonce address]
+    =/  get-balance  [%get-balance address]
 
-    =/  start-args  [~ `tid byk.bowl(r da+now.bowl) %eth-provider !>(get-balance)]
+    =/  start-args  [~ `tid byk.bowl(r da+now.bowl) %eth-provider !>(get-next-nonce)]
     =/  ta-now  `@ta`(scot %da now.bowl)
     :_  this
     :~
