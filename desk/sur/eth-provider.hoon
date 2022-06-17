@@ -10,7 +10,7 @@
 +$  provider
   $:  =url
       kids=?  :: allow stars to receive requests from their planets
-      clients=(list @p)
+      clients=(set @p)
   ==
 +$  client
   $:  provider=@p
@@ -30,6 +30,9 @@
       [%set-provider =provider]
       [%set-client =client]
       [%provide tid=@ta =ethin]
+      [%set-kids kids=?]
+      [%add-client client=@p]
+      [%remove-client client=@p]
   ==
 :: +$  update
 ::   $%  [%get-state =mode]
@@ -52,7 +55,7 @@
       [%get-balance =address]
   ==
 +$  ethout
-  $?  [balance=@ud]
+  $?  [%get-balance balance=@ud]
       [noun=*]
   ==
 --

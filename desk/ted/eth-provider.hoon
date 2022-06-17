@@ -8,15 +8,9 @@
 |=  arg=vase
 =/  m  (strand ,vase)
 ^-  form:m
-::
-=/  url  'http://localhost:8545'
-~&  'thread called!'
-
 =/  eth-input  !<(ethin:eth-provider arg)
 ;<  =bowl:spider  bind:m  get-bowl:strandio
-:: =/  ship  !<(@p +<.arg)
-:: =/  tid  !<(@ta +>.arg)
-
+?>  =(src.bowl our.bowl)
 ;<    state=state:eth-provider
     bind:m
   (scry:strandio state:eth-provider /gx/eth-provider/get-state/noun)
@@ -27,13 +21,10 @@
 (call-ethio eth-input active.state url.provider.state)
   %client
 ~&  'client branch taken'
+;<  ~  bind:m  (watch:strandio /updates [~nut %eth-provider] [%updates tid.bowl ~])
 ;<  ~  bind:m  (poke:strandio [provider.client.state %eth-provider] [%provider-action !>([%provide tid.bowl eth-input])])
-~&  'client branch taken2'
-;<  vmsg=vase   bind:m  (take-poke:strandio %noun)
-~&  'vmsg console message'
-~&  vmsg
-~&  '===================='
-(pure:m vmsg)
+;<  =cage  bind:m  (take-fact:strandio /updates)
+(pure:m q.cage)
 ==
 ::
 |%
