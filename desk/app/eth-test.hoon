@@ -47,14 +47,15 @@
     =/  request-batch-rpc-loose  [%request-batch-rpc-loose ~[+.request-rpc]]
     =/  read-contract  [%read-contract [[~ 'unitid'] address ['func' ~[[%address address]]]]]
     =/  batch-read-contract-strict  [%batch-read-contract-strict ~[+.request-rpc]]
-    =/  get-latest-block  [%get-latest-block %.n]
-    =/  get-block-by-number  [%get-block-by-number 123]
+    =/  get-latest-block  [%get-latest-block %.n]  :: same type
+    =/  get-block-by-number  [%get-block-by-number 123]  :: same type
     =/  get-tx-by-hash  [%get-tx-by-hash address]
     :: =/  get-logs-by-hash  [%get-logs-by-hash address]
+    :: =/  get-logs-by-range  [%get-logs-by-range [address ~] [] 0 1]
     =/  get-next-nonce  [%get-next-nonce address]
     =/  get-balance  [%get-balance address]
 
-    =/  start-args  [~ `tid byk.bowl(r da+now.bowl) %eth-provider !>(get-next-nonce)]
+    =/  start-args  [~ `tid byk.bowl(r da+now.bowl) %eth-provider !>(read-contract)]
     =/  ta-now  `@ta`(scot %da now.bowl)
     :_  this
     :~
@@ -105,7 +106,8 @@
          `this
            %thread-done
          :: =/  res  !<(ethout:eth-provider q.cage.sign)
-         =/  res  !<(ethout:eth-provider q.cage.sign)
+         :: =/  res  !<(ethout:eth-provider q.cage.sign)
+         =/  res  !<(* q.cage.sign)
          ~&  "eth-test thread-done!"
          ~&  res
          `this

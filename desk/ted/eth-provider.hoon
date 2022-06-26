@@ -1,4 +1,4 @@
-/-  spider, eth-provider
+/-  spider, eth-provider, json-rpc
 /+  strandio, ethio, ethereum
 =,  strand=strand:spider
 =,  dejs-soft:format
@@ -35,7 +35,8 @@
       client=client:eth-provider
   ==
 ++  is-client
-  |=  [tid=@tatid active=active:eth-provider eth-output=ethout:eth-provider]
+  :: |=  [tid=@tatid active=active:eth-provider eth-output=ethout:eth-provider]
+  |=  [tid=@tatid active=active:eth-provider eth-output=*]
   =/  m  (strand ,vase)
   :: (pure:m !>([tid eth-output]))
   ?-  active
@@ -53,16 +54,18 @@
   ;<  =bowl:spider  bind:m  get-bowl:strandio
   ?-  -.arg
     %request-rpc
-  ;<  out=*  bind:m  (request-rpc:ethio url +.arg)
+  ;<  out=ethout:eth-provider  bind:m  (request-rpc:ethio url +.arg)
+  ~&  out
   (is-client tid.bowl active out)
     %request-batch-rpc-strict
-  ;<  out=*  bind:m  (request-batch-rpc-strict:ethio url +.arg)
+  ;<  out=@ux  bind:m  (request-batch-rpc-strict:ethio url +.arg)
+  :: ;<  out=*  bind:m  (request-batch-rpc-strict:ethio url +.arg)
   (is-client tid.bowl active out)
     %request-batch-rpc-loose
   ;<  out=*  bind:m  (request-batch-rpc-loose:ethio url +.arg)
   (is-client tid.bowl active out)
     %read-contract
-  ;<  out=*  bind:m  (read-contract:ethio url +.arg)
+  ;<  out=ethout:eth-provider  bind:m  (read-contract:ethio url +.arg)
   (is-client tid.bowl active out)
     %batch-read-contract-strict
   ;<  out=*  bind:m  (batch-read-contract-strict:ethio url +.arg)
@@ -83,10 +86,10 @@
   ;<  out=*  bind:m  (get-logs-by-range:ethio url +.arg)
   (is-client tid.bowl active out)
     %get-next-nonce
-  ;<  out=*  bind:m  (get-next-nonce:ethio url +.arg)
+  ;<  out=ethout:eth-provider  bind:m  (get-next-nonce:ethio url +.arg)
   (is-client tid.bowl active out)
     %get-balance
-  ;<  out=*  bind:m  (get-balance:ethio url +.arg)
+  ;<  out=ethout:eth-provider  bind:m  (get-balance:ethio url +.arg)
   (is-client tid.bowl active out)
   ==
 --

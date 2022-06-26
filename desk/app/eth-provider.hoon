@@ -80,10 +80,9 @@
           ==
       ~
         %provide
-      :: TODO permissions!!!
+      :: Is in client or (kids active and is a kid)
       ~&  'nut provide called!'
       ?>  =(active.state %provider)
-      :: Is in client or (kids active and is a kid)
       ?>  ?|  =(~ (find ~[src.bowl] clients:provider))
               ?&  kids:provider
                   =((sein:title our.bowl now.bowl src.bowl) our.bowl)

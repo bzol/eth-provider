@@ -1,3 +1,4 @@
+/-  json-rpc
 /+  ethereum
 =,  ethereum-types
 =,  jael
@@ -55,7 +56,15 @@
       [%get-balance =address]
   ==
 +$  ethout
-  $?  [%get-balance balance=@ud]
-      [noun=*]
+  :: $%
+  $?  
+      :: [noun=*]
+      :: [res=json:json-rpc]
+      [res=(list json:json-rpc)]
+      [number=@ud]
+      [string=@t]
+      :: [res=json:json-rpc]
+      :: [res=@tas]
+      :: []
   ==
 --

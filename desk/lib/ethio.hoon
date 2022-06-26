@@ -31,6 +31,8 @@
   |=  [url=@ta reqs=(list [id=(unit @t) req=request:rpc:ethereum])]
   |^  %+  (retry:strandio results)
         `10
+      :: ~|  'sample error message'
+      :: ~!  attempt-request
       attempt-request
   ::
   +$  results  (list [id=@t =json])
@@ -47,6 +49,9 @@
     |=  $:  rpc=response:rpc
             [res=results err=(list [id=@t code=@t message=@t])]
         ==
+    ~&  [res [+.rpc err]]
+    ~&  [res [['' 'ethio-rpc-fail' (crip <rpc>)] err]]
+    ~&  [[+.rpc res] err]
     ?:  ?=(%error -.rpc)
       [res [+.rpc err]]
     ?.  ?=(%result -.rpc)
