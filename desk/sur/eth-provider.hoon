@@ -47,7 +47,7 @@
       [%request-batch-rpc-loose reqs=(list [id=(unit @t) req=request:rpc:ethereum])]
       [%read-contract req=proto-read-request:rpc:ethereum]
       [%batch-read-contract-strict reqs=(list proto-read-request:rpc:ethereum)]
-      [%get-latest-block foo=?]
+      [%get-latest-block ?]
       [%get-block-by-number =number:block]
       [%get-tx-by-hash tx-hash=@ux]
       [%get-logs-by-hash =hash:block contracts=(list address) =topics]
@@ -57,12 +57,24 @@
   ==
 +$  ethout
   :: $%
-  $?  
-      :: [noun=*]
+  $%  
+      [%request-rpc res=json]
+      [%request-batch-rpc-strict res=(list [id=@t =json])]
+      [%request-batch-rpc-loose res=(list response:json-rpc)]
+      [%read-contract res=@t]
+      [%batch-read-contract-strict results=(list [id=@t res=@t])]
+      [%get-latest-block =block]
+      [%get-block-by-number =block]  :: ethio-rpc-fail
+      [%get-tx-by-hash res=transaction-result:rpc:ethereum]  :: ethio-rpc-fail
+      [%get-logs-by-hash res=(list event-log:rpc:ethereum)]
+      [%get-logs-by-range res=(list event-log:rpc:ethereum)]
+      [%get-next-nonce nonce=@ud]
+      [%get-balance balance=@ud]
+
       :: [res=json:json-rpc]
-      [res=(list json:json-rpc)]
-      [number=@ud]
-      [string=@t]
+      :: [res=(list json:json-rpc)]
+      :: [number=@ud]
+      :: [string=@t]
       :: [res=json:json-rpc]
       :: [res=@tas]
       :: []

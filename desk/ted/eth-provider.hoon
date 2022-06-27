@@ -3,6 +3,7 @@
 =,  strand=strand:spider
 =,  dejs-soft:format
 =,  strand-fail=strand-fail:libstrand:spider
+=,  jael
 =<
 ^-  thread:spider
 |=  arg=vase
@@ -36,7 +37,7 @@
   ==
 ++  is-client
   :: |=  [tid=@tatid active=active:eth-provider eth-output=ethout:eth-provider]
-  |=  [tid=@tatid active=active:eth-provider eth-output=*]
+  |=  [tid=@tatid active=active:eth-provider eth-output=ethout:eth-provider]
   =/  m  (strand ,vase)
   :: (pure:m !>([tid eth-output]))
   ?-  active
@@ -54,42 +55,41 @@
   ;<  =bowl:spider  bind:m  get-bowl:strandio
   ?-  -.arg
     %request-rpc
-  ;<  out=ethout:eth-provider  bind:m  (request-rpc:ethio url +.arg)
-  ~&  out
-  (is-client tid.bowl active out)
+  ;<  out=json  bind:m  (request-rpc:ethio url +.arg)
+  (is-client tid.bowl active [%request-rpc out])
     %request-batch-rpc-strict
-  ;<  out=@ux  bind:m  (request-batch-rpc-strict:ethio url +.arg)
-  :: ;<  out=*  bind:m  (request-batch-rpc-strict:ethio url +.arg)
-  (is-client tid.bowl active out)
+  ;<  out=(list [id=@t =json])  bind:m  (request-batch-rpc-strict:ethio url +.arg)
+  (is-client tid.bowl active [%request-batch-rpc-strict out])
     %request-batch-rpc-loose
-  ;<  out=*  bind:m  (request-batch-rpc-loose:ethio url +.arg)
-  (is-client tid.bowl active out)
+  ;<  out=(list response:json-rpc)  bind:m  (request-batch-rpc-loose:ethio url +.arg)
+  (is-client tid.bowl active [%request-batch-rpc-loose out])
     %read-contract
-  ;<  out=ethout:eth-provider  bind:m  (read-contract:ethio url +.arg)
-  (is-client tid.bowl active out)
+  ;<  out=@t  bind:m  (read-contract:ethio url +.arg)
+  (is-client tid.bowl active [%read-contract out])
     %batch-read-contract-strict
-  ;<  out=*  bind:m  (batch-read-contract-strict:ethio url +.arg)
-  (is-client tid.bowl active out)
+  ;<  out=(list [@t res=@t])  bind:m  (batch-read-contract-strict:ethio url +.arg)
+  (is-client tid.bowl active [%batch-read-contract-strict out])
     %get-latest-block
-  ;<  out=*  bind:m  (get-latest-block:ethio url)
-  (is-client tid.bowl active out)
+  ;<  out=block  bind:m  (get-latest-block:ethio url)
+  (is-client tid.bowl active [%get-latest-block out])
     %get-block-by-number
-  ;<  out=*  bind:m  (get-block-by-number:ethio url +.arg)
-  (is-client tid.bowl active out)
+  ;<  out=block  bind:m  (get-block-by-number:ethio url +.arg)
+  (is-client tid.bowl active [%get-block-by-number out])
     %get-tx-by-hash
-  ;<  out=*  bind:m  (get-tx-by-hash:ethio url +.arg)
-  (is-client tid.bowl active out)
+  ;<  out=transaction-result:rpc:ethereum  bind:m  (get-tx-by-hash:ethio url +.arg)
+  (is-client tid.bowl active [%get-tx-by-hash out])
     %get-logs-by-hash
-  ;<  out=*  bind:m  (get-logs-by-hash:ethio url +.arg)
-  (is-client tid.bowl active out)
+  ;<  out=(list event-log:rpc:ethereum)  bind:m  (get-logs-by-hash:ethio url +.arg)
+  (is-client tid.bowl active [%get-logs-by-hash out])
     %get-logs-by-range
-  ;<  out=*  bind:m  (get-logs-by-range:ethio url +.arg)
-  (is-client tid.bowl active out)
+  ;<  out=(list event-log:rpc:ethereum)  bind:m  (get-logs-by-range:ethio url +.arg)
+  (is-client tid.bowl active [%get-logs-by-range out])
     %get-next-nonce
-  ;<  out=ethout:eth-provider  bind:m  (get-next-nonce:ethio url +.arg)
-  (is-client tid.bowl active out)
+  ;<  out=@ud  bind:m  (get-next-nonce:ethio url +.arg)
+  (is-client tid.bowl active [%get-next-nonce out])
     %get-balance
-  ;<  out=ethout:eth-provider  bind:m  (get-balance:ethio url +.arg)
-  (is-client tid.bowl active out)
+  ;<  out=@ud  bind:m  (get-balance:ethio url +.arg)
+  ~&  out
+  (is-client tid.bowl active [%get-balance out])
   ==
 --
