@@ -10,6 +10,7 @@
 
 # Tests
 |rein %base [& %eth-test] [& %eth-provider]
+:eth-provider &provider-action [%set-local 'http://localhost:8545']
 :eth-provider &provider-action [%set-provider ['http://localhost:8545' %.n ~]]
 :eth-provider &provider-action [%set-client ~nut]
 :eth-test &start-eth-action ~
