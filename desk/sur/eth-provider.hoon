@@ -70,13 +70,5 @@
       [%get-logs-by-range res=(list event-log:rpc:ethereum)]
       [%get-next-nonce nonce=@ud]
       [%get-balance balance=@ud]
-
-      :: [res=json:json-rpc]
-      :: [res=(list json:json-rpc)]
-      :: [number=@ud]
-      :: [string=@t]
-      :: [res=json:json-rpc]
-      :: [res=@tas]
-      :: []
   ==
 --

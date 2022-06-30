@@ -55,7 +55,7 @@
     =/  get-next-nonce  [%get-next-nonce address]
     =/  get-balance  [%get-balance address]
 
-    =/  start-args  [~ `tid byk.bowl(r da+now.bowl) %eth-provider !>(get-block-by-number)]
+    =/  start-args  [~ `tid byk.bowl(r da+now.bowl) %eth-provider !>(get-balance)]
     =/  ta-now  `@ta`(scot %da now.bowl)
     :_  this
     :~
