@@ -1,7 +1,7 @@
 ::  eth-watcher: ethereum event log collector
 ::
-/-  spider, *eth-watcher
-/+  strandio, ethio, azimuth
+/-  spider, *eth-watcher, ethdata=eth-provider
+/+  strandio, ethio, azimuth, eth-provider
 =,  ethereum-types
 =,  jael
 ::
@@ -12,7 +12,9 @@
 =+  !<([~ pup=watchpup] args)
 =/  m  (strand:strandio ,vase)
 ^-  form:m
-;<  =latest=block  bind:m  (get-latest-block:ethio url.pup)
+~&  '===eth-provider_1==='
+;<  res=ethout:ethdata  bind:m  (eth-provider [%get-latest-block url.pup])
+=/  latest  +.res
 =+  last=number.id.latest-block
 ;<  pup=watchpup   bind:m  (zoom pup last (min last (fall to.pup last)))
 =|  vows=disavows
@@ -40,8 +42,10 @@
   ?:  &(?=(^ blocks.pup) !=(parent-hash.block hash.id.i.blocks.pup))
     (rewind pup block)
   =/  contracts  (weld contracts.pup batchers.pup)
-  ;<  =new=loglist  bind:m  ::  oldest first
-    (get-logs-by-hash:ethio url.pup hash.id.block contracts topics.pup)
+  ~&  '===eth-provider_2==='
+  ;<  res=ethout:ethdata  bind:m  ::  oldest first
+    (eth-provider [%get-logs-by-hash url.pup hash.id.block contracts topics.pup])
+  =/  new  +.res
   %-  pure:m
   :-  ~
   %_  pup

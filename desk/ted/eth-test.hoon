@@ -16,6 +16,6 @@
 =/  get-balance  [%get-next-nonce address]
 
 :: ;<  res=ethout:ethdata  bind:m  (eth-provider [%get-balance address])
-;<  res=*  bind:m  (eth-provider [%get-balance address])
+;<  res=ethout:ethdata  bind:m  (eth-provider [%get-balance address])
 
-(pure:m !>(res))
+(pure:m !>(13))
