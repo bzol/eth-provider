@@ -2,7 +2,7 @@
 ::
 ::    produces list of @da result
 ::
-/+  ethereum, ethio, strandio
+/+  ethereum, ethio, strandio, eth-provider
 =,  ethereum-types
 =,  jael
 ::
@@ -22,12 +22,16 @@
 ::
 ++  request-blocks
   |=  blocks=(list @ud)
-  %+  request-batch-rpc-strict:ethio  url
-  %+  turn  blocks
-  |=  block=@ud
-  ^-  [(unit @t) request:rpc:ethereum]
-  :-  `(scot %ud block)
-  [%eth-get-block-by-number block |]
+  %-  eth-provider
+  :*
+      %request-batch-rpc-strict  
+      url
+      %+  turn  blocks
+      |=  block=@ud
+      ^-  [(unit @t) request:rpc:ethereum]
+      :-  `(scot %ud block)
+      [%eth-get-block-by-number block |]
+  ==
 ::
 ++  parse-results
   |=  res=(list [@t json])

@@ -17,9 +17,10 @@
 =/  roller-send  [%roller-send !>(['http://localhost:8545' address 0 0])]
 =/  read-contract  [%eth-read-contract !>(['http://localhost:8545' [[~ 'unitid'] address ['func' ~[[%address address]]]]])]
 :: =/  prep-command  [%claz-prep-command !>(['http://localhost:8545' [%generate]])]
-=/  eth-watcher  [%eth-watcher !>(['http://localhost:8545' ~[0x123]])]
+:: =/  eth-watcher  [%eth-watcher !>(['http://localhost:8545'])]
+
 ;<  t=vase  bind:m  (test-thread get-timestamps)
-;<  t2=vase  bind:m  (test-thread get-tx-receipts)
+:: ;<  t2=vase  bind:m  (test-thread get-tx-receipts)
 :: ;<  t3=vase  bind:m  (test-thread send-txs)
 :: ;<  t4=vase  bind:m  (test-thread roller-send)
 :: ;<  t5=vase  bind:m  (test-thread read-contract)
