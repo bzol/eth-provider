@@ -49,9 +49,6 @@
     |=  $:  rpc=response:rpc
             [res=results err=(list [id=@t code=@t message=@t])]
         ==
-    ~&  [res [+.rpc err]]
-    ~&  [res [['' 'ethio-rpc-fail' (crip <rpc>)] err]]
-    ~&  [[+.rpc res] err]
     ?:  ?=(%error -.rpc)
       [res [+.rpc err]]
     ?.  ?=(%result -.rpc)
