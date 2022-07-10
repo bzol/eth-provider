@@ -6,6 +6,7 @@
 ::
 |=  args=vase
 =+  !<(rpc-send-roll args)
+~&  '========roller-send========'
 =/  m  (strand:strandio ,vase)
 |^
 ^-  form:m

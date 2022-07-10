@@ -9,6 +9,7 @@
 ::
 |=  args=vase
 =+  !<([url=@t tx-hashes=(list @ux)] args)
+~&  '========get-tx-receipts========'
 =/  m  (strand ,vase)
 =|  out=(list [@t json])
 |^

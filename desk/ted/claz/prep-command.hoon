@@ -8,6 +8,7 @@
 |=  args=vase
 =/  [url=@t =command]
   !<([@t command] args)
+~&  '========prep-command========'
 =/  m  (strand:strandio ,vase)
 ^-  form:m
 ?.  ?=(%generate -.command)  !!  ::TODO

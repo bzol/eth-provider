@@ -12,4 +12,5 @@
 ;<  res=@t  bind:m
   %-  read-contract:ethio
   !<([@t proto-read-request:rpc:ethereum] args)
+~&  '========read-contract========'
 (pure:m !>(res))

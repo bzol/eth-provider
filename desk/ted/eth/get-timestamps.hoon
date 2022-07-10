@@ -8,6 +8,7 @@
 ::
 |=  args=vase
 =+  !<([url=@t blocks=(list @ud)] args)
+~&  '========get-timestamps========'
 =/  m  (strand:strandio ,vase)
 =|  out=(list [block=@ud timestamp=@da])
 |^  ^-  form:m

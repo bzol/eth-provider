@@ -14,6 +14,7 @@
 ::
 |=  args=vase
 =+  !<([url=@t step-size=@ud txs=(list @ux)] args)
+~&  '========send-txs========'
 =/  m  (strand:strandio ,vase)
 ^-  form:m
 |-
