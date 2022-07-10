@@ -2,6 +2,7 @@
 ::
 ::    produces list of @da result
 ::
+/-  ethdata=eth-provider
 /+  ethereum, ethio, strandio, eth-provider
 =,  ethereum-types
 =,  jael
@@ -13,8 +14,12 @@
 |^  ^-  form:m
     =*  loop  $
     ?:  =(~ blocks)  (pure:m !>(out))  ::TODO  TMI
-    ;<  res=(list [@t json])  bind:m
+    ~&  '--------------'
+    ;<  res2=ethout:ethdata  bind:m
       (request-blocks (scag 100 blocks))
+    ?>  ?=(%request-batch-rpc-strict -.res2)
+    ~&  res2
+    =/  res  +.res2
     %_  loop
       out     (weld out (parse-results res))
       blocks  (slag 100 blocks)
@@ -25,7 +30,8 @@
   %-  eth-provider
   :*
       %request-batch-rpc-strict  
-      url
+      :: url
+      :: [[~ 'u_tid'] [%eth-block-number ~]]
       %+  turn  blocks
       |=  block=@ud
       ^-  [(unit @t) request:rpc:ethereum]

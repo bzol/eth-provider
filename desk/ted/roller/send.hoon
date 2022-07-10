@@ -1,18 +1,30 @@
 ::  roller/send: send rollup tx
 ::
-/-  rpc=json-rpc, *dice
-/+  naive, ethereum, ethio, strandio
+/-  rpc=json-rpc, *dice, ethdata=eth-provider, spider
+/+  naive, ethereum, ethio, strandio, eth-provider
 ::
 ::
+^-  thread:spider
 |=  args=vase
+~&  'rpc-snd-roll'
 =+  !<(rpc-send-roll args)
+~&  'rpc-snd-roll2'
+
 =/  m  (strand:strandio ,vase)
 |^
 ^-  form:m
 ::
+
 =/  =address:ethereum  (address-from-prv:key:ethereum pk)
-;<  expected-nonce=@ud  bind:m
-  (get-next-nonce:ethio endpoint address)
+;<  res=ethout:ethdata  bind:m  (eth-provider [%get-next-nonce address])
+~&  'rpc-snd-roll5'
+?>  ?=(%get-next-nonce -.res)
+~&  'rpc-snd-roll3'
+~&  -.res
+
+=/  expected-nonce  `@ud`+.res
+~&  'rpc-snd-roll4'
+
 ::  Infura enforces a max calldata size (32, 64, 128 Kb?) so we calculate how
 ::  many txs are included in a batch of that size, and only send those
 ::

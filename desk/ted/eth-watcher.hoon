@@ -10,6 +10,7 @@
 |=  args=vase
 |^
 =+  !<([~ pup=watchpup] args)
+~&  'eth-watcher_1'
 =/  m  (strand:strandio ,vase)
 ^-  form:m
 ~&  '===eth-provider_1==='
