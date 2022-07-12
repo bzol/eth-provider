@@ -5,6 +5,7 @@
 ::
 |=  args=vase
 =+  !<([endpoint=@t pk=@] args)
+~&  '========roller-nonce========'
 =/  m  (strand:strandio ,vase)
 ^-  form:m
 ::

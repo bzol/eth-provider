@@ -15,6 +15,7 @@
 =/  get-tx-receipts  [%eth-get-tx-receipts !>(['http://localhost:8545' ~[0x123]])]
 =/  send-txs  [%eth-send-txs !>(['http://localhost:8545' 1 ~[0x123]])]
 =/  roller-send  [%roller-send !>(['http://localhost:8545' address 0 0 0 0 0 ~[[0 [0 0] [[~zod %spawn] [%spawn ~zod address]]]]])]
+=/  roller-nonce  [%roller-nonce !>(['http://localhost:8545' 1 ~[0x123]])]
 =/  read-contract  [%eth-read-contract !>(['http://localhost:8545' [[~ 'unitid'] address ['func' ~[[%address address]]]]])]
 =/  prep-command  [%claz-prep-command !>(['http://localhost:8545' [%generate /updates %mainnet address [%deed '{}']]])]
 =/  eth-watcher  [%eth-watcher !>([~ [['http://localhost:8545' %.n ~h1 ~m1 0 [~ 0] ~[0x123] ~[0x123] ~[0x123]] 0 ~ ~[[[0x123 123] 0x123]]]])]
