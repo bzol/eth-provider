@@ -1,13 +1,14 @@
 ::  claz/pre-command: sanity-check command and gather prerequisites
 ::
-/-  *claz
-/+  *claz, ethio, strandio
+/-  *claz, ethdata=eth-provider
+/+  *claz, ethio, strandio, eth-provider
 =,  ethereum-types
 =,  jael
 ::
 |=  args=vase
 =/  [url=@t =command]
   !<([@t command] args)
+~&  '===prep-command==='
 =/  m  (strand:strandio ,vase)
 ^-  form:m
 ?.  ?=(%generate -.command)  !!  ::TODO
@@ -21,9 +22,11 @@
     ::  gather prerequisites
     ::
     ~&  [%gonna-get-nonce url as.command]
-    ;<  nonce=@ud  bind:m
-      (get-next-nonce:ethio url as.command)
-    ~&  [%got-nonce nonce]
+    ;<  res=ethout:ethdata  bind:m
+      (eth-provider [%get-next-nonce as.command])
+    ?>  ?=(%get-next-nonce -.res)
+    =/  nonce  +.res
+~&  '===prep-command2==='
     (pure:m !>([%nonce nonce]))
 ::
 ++  check-invites
@@ -44,7 +47,10 @@
   =/  m  (strand:strandio ,(unit tang))
   ^-  form:m
   ;<  responses=(list [@t @t])  bind:m
-    %+  batch-read-contract-strict:ethio  url
+  %+  batch-read-contract-strict:ethio  url
+  :: ;<  res=ethout:ethdata  bind:m
+  ::   %-  eth-provider
+  ::   :-  %batch-read-contract-strict
     %+  turn  ships
     |=  =ship
     ^-  proto-read-request:rpc
@@ -52,6 +58,10 @@
       ::TODO  argument?
       azimuth:contracts:azimuth
     (rights:cal ship)
+  :: ?>  ?=(%batch-read-contract-strict -.res)
+  :: =/  responses  +.res
+  =/  test  13
+  ~&  '===prep-command3==='
   =/  taken=(list ship)
     %+  murn  responses
     |=  [id=@t res=@t]
