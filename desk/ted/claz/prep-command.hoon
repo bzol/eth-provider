@@ -103,8 +103,9 @@
     ~&  '===prep-command4==='
     %-  pure:n
     (decode-results:rpc res [%uint]~)
-  ;<  responses=(list [id=@t res=@t])  bind:m
-    %+  batch-read-contract-strict:ethio  url
+  ;<  res2=ethout:ethdata  bind:m
+    %-  eth-provider
+    :-  %batch-read-contract-strict
     %+  turn  ~(tap by counts)
     |=  [=ship @ud]
     ^-  proto-read-request:rpc
@@ -112,6 +113,9 @@
       ::TODO pass in as argument
       delegated-sending:contracts:azimuth
     (pools:cal pool ship)
+  ?>  ?=(%batch-read-contract-strict -.res2)
+  =/  responses  +.res2
+  ~&  '===prep-command5==='
   =/  missing=(list [star=ship have=@ud needed=@ud])
     %+  murn  responses
     |=  [id=@t res=@t]
