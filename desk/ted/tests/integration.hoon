@@ -24,10 +24,12 @@
 :: ;<  t=vase  bind:m  (test-thread get-timestamps)
 :: ;<  t2=vase  bind:m  (test-thread get-tx-receipts)
 :: ;<  t3=vase  bind:m  (test-thread send-txs)
-;<  t4=vase  bind:m  (test-thread roller-send)
+:: ;<  t4=vase  bind:m  (test-thread roller-send)
 :: ;<  t5=vase  bind:m  (test-thread roller-nonce)
 :: ;<  t6=vase  bind:m  (test-thread read-contract)
-:: ;<  t7=vase  bind:m  (test-thread prep-command)
+
+;<  t7=vase  bind:m  (test-thread prep-command)
+
 :: ;<  t8=vase  bind:m  (test-thread eth-watcher)
 (pure:m !>(0))
 ::
