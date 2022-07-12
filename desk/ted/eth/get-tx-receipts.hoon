@@ -5,11 +5,12 @@
 ::    hex written as a cord, and json is the receipt
 ::
 /-  ethdata=eth-provider
-/+  ethereum, ethio, *strandio, eth-provider
+/+  ethereum, *strandio, eth-provider
 =,  jael
 ::
 |=  args=vase
 =+  !<([url=@t tx-hashes=(list @ux)] args)
+~&  '========get-tx-receipts========'
 =/  m  (strand ,vase)
 =|  out=(list [@t json])
 |^
@@ -18,8 +19,10 @@
 ?:  =(~ tx-hashes)  (pure:m !>(out))
 ;<  res2=ethout:ethdata  bind:m
   (request-receipts url (scag 100 tx-hashes))
+?>  ?=(%request-batch-rpc-strict -.res2)
 =/  res  +.res2
-~&  res2
+~&  res
+~&  '========get-tx-receipts2========'
 %_  loop
   out        (welp out res)
   tx-hashes  (slag 100 tx-hashes)
@@ -28,12 +31,10 @@
 ++  request-receipts
   |=  [url=@t tx-hashes=(list @ux)]
   %-  eth-provider  
-  :*
-  %request-batch-rpc-strict
+  :-  %request-batch-rpc-strict
   %+  turn  tx-hashes
   |=  txh=@ux
   ^-  [(unit @t) request:rpc:ethereum]
   :-  `(crip '0' 'x' ((x-co:co 64) txh))
   [%eth-get-transaction-receipt txh]
-  ==
 --

@@ -6,9 +6,8 @@
 ::
 ^-  thread:spider
 |=  args=vase
-~&  'rpc-snd-roll'
 =+  !<(rpc-send-roll args)
-~&  'rpc-snd-roll2'
+~&  '===roller-send==='
 
 =/  m  (strand:strandio ,vase)
 |^
@@ -17,14 +16,10 @@
 
 =/  =address:ethereum  (address-from-prv:key:ethereum pk)
 ;<  res=ethout:ethdata  bind:m  (eth-provider [%get-next-nonce address])
-~&  'rpc-snd-roll5'
 ?>  ?=(%get-next-nonce -.res)
-~&  'rpc-snd-roll3'
-~&  -.res
-
-=/  expected-nonce  `@ud`+.res
-~&  'rpc-snd-roll4'
-
+=/  expected-nonce  +.res
+:: ~&  expected-nonce
+~&  '===roller-send2==='
 ::  Infura enforces a max calldata size (32, 64, 128 Kb?) so we calculate how
 ::  many txs are included in a batch of that size, and only send those
 ::

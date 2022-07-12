@@ -19,7 +19,6 @@
   %provider
 (call-ethio eth-input active.state url.provider.state)
   %client
-~&  'client branch taken'
 ;<  ~  bind:m  (watch:strandio /updates [~nut %eth-provider] [%updates tid.bowl ~])
 ;<  ~  bind:m  (poke:strandio [provider.client.state %eth-provider] [%provider-action !>([%provide tid.bowl eth-input])])
 ;<  =cage  bind:m  (take-fact:strandio /updates)
@@ -28,7 +27,6 @@
 |%
 ++  call-ethio
   |=  [arg=ethin:eth-provider active=active:eth-provider url=@ta]
-  ~&  'call-ethio called!'
   :: =/  m  (strand ,vase)
   =/  m  (strand ,ethout:eth-provider)
   ;<  =bowl:spider  bind:m  get-bowl:strandio

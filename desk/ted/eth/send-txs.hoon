@@ -2,8 +2,8 @@
 ::
 ::    produces hex string result, for use with +decode-results:rpc:ethereum
 ::
-/-  rpc=json-rpc
-/+  ethio, strandio
+/-  rpc=json-rpc, ethdata=eth-provider
+/+  strandio, eth-provider
 ::
 =>
   |%
@@ -14,6 +14,7 @@
 ::
 |=  args=vase
 =+  !<([url=@t step-size=@ud txs=(list @ux)] args)
+~&  '========send-txs========'
 =/  m  (strand:strandio ,vase)
 ^-  form:m
 |-
@@ -22,12 +23,17 @@
 ?:  =(~ txs)  (pure:m !>(~))
 ::  send a step-size batch of transactions
 ::
-;<  responses=(list response:rpc)  bind:m
-  %+  request-batch-rpc-loose:ethio  url
+;<  res=ethout:ethdata  bind:m
+  %-  eth-provider
+  :-  %request-batch-rpc-loose
   %+  turn  (scag step-size txs)
   |=  tx=@ux
   :-  `(scot %ux (end [3 10] tx))
   [%eth-send-raw-transaction tx]
+?>  ?=(%request-batch-rpc-loose -.res)
+=/  responses  +.res
+~&  responses
+~&  '========send_txs2========'
 ::  parse tx hashes out of responses, bailing on submission failure
 ::
 =/  pending=(each (set @ux) [term tang])

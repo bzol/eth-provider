@@ -3,23 +3,25 @@
 ::    produces list of @da result
 ::
 /-  ethdata=eth-provider
-/+  ethereum, ethio, strandio, eth-provider
+/+  ethereum, strandio, eth-provider
 =,  ethereum-types
 =,  jael
 ::
 |=  args=vase
 =+  !<([url=@t blocks=(list @ud)] args)
+~&  '========get-timestamps========'
 =/  m  (strand:strandio ,vase)
 =|  out=(list [block=@ud timestamp=@da])
 |^  ^-  form:m
     =*  loop  $
     ?:  =(~ blocks)  (pure:m !>(out))  ::TODO  TMI
-    ~&  '--------------'
     ;<  res2=ethout:ethdata  bind:m
       (request-blocks (scag 100 blocks))
     ?>  ?=(%request-batch-rpc-strict -.res2)
     ~&  res2
     =/  res  +.res2
+    ~&  res
+    ~&  '========get-timestamps2========'
     %_  loop
       out     (weld out (parse-results res))
       blocks  (slag 100 blocks)
