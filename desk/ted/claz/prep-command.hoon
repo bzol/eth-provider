@@ -91,12 +91,16 @@
     +((~(gut by counts) p 0))
   ;<  pool=@ud  bind:m
     =/  n  (strand:strandio ,@ud)
-    ;<  res=@t  bind:n
-      %+  read-contract:ethio  url
+    ;<  res2=ethout:ethdata  bind:n
+      %-  eth-provider
+      :-  %read-contract
       :+  `'pool'
         ::TODO pass in as argument
         delegated-sending:contracts:azimuth
       (get-pool:cal as)
+    ?>  ?=(%read-contract -.res2)
+    =/  res  +.res2
+    ~&  '===prep-command4==='
     %-  pure:n
     (decode-results:rpc res [%uint]~)
   ;<  responses=(list [id=@t res=@t])  bind:m
