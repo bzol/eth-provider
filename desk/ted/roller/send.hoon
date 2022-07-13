@@ -1,7 +1,7 @@
 ::  roller/send: send rollup tx
 ::
 /-  rpc=json-rpc, *dice, ethdata=eth-provider, spider
-/+  naive, ethereum, ethio, strandio, eth-provider
+/+  naive, ethereum, strandio, eth-provider
 ::
 ::
 ^-  thread:spider
@@ -162,8 +162,10 @@
   ^-  form:m
   =/  req=[(unit @t) request:rpc:ethereum]
     [`'sendRawTransaction' %eth-send-raw-transaction batch]
-  ;<  res=(list response:rpc)  bind:m
-    (request-batch-rpc-loose:ethio endpoint [req]~)
+  ;<  res2=ethout:ethdata  bind:m
+    (eth-provider [%request-batch-rpc-loose [req]~])
+  ?>  ?=(%request-batch-rpc-loose -.res2)
+  =/  res  `(list response:rpc)`+.res2
   ~&  '===roller-send4==='
   ?:  ?=([* ~] res)
     (pure:m i.res)

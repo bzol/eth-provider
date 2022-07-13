@@ -1,5 +1,5 @@
 /-  spider, ethdata=eth-provider, json-rpc
-/+  strandio, ethio, ethereum, eth-provider
+/+  strandio, ethereum, eth-provider
 =,  strand=strand:spider
 =,  dejs-soft:format
 =,  strand-fail=strand-fail:libstrand:spider
