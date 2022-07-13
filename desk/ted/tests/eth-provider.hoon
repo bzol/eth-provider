@@ -21,13 +21,17 @@
 =/  batch-read-contract-strict  [%batch-read-contract-strict ~[+.read-contract]]
 =/  get-latest-block  [%get-latest-block %.n]
 =/  get-block-by-number  [%get-block-by-number 0]
-=/  get-tx-by-hash  [%get-tx-by-hash address]  :: retest
+=/  get-tx-by-hash  [%get-tx-by-hash 0x123]  :: bad hash
 =/  get-logs-by-hash  [%get-logs-by-hash 0x123 [address ~] ~]
 =/  get-logs-by-range  [%get-logs-by-range [address ~] ~ 0 1]
 =/  get-next-nonce  [%get-next-nonce address]
 =/  get-balance  [%get-balance address]
 
 :: ;<  res=ethout:ethdata  bind:m  (eth-provider [%get-balance address])
-;<  res=ethout:ethdata  bind:m  (eth-provider batch-read-contract-strict)
+;<  res=ethout:ethdata  bind:m  (eth-provider get-tx-by-hash)
+:: =/  res2  !>(res)
+:: =/  res2  +<.res
+
+
 
 (pure:m !>(res))

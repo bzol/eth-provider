@@ -47,7 +47,7 @@
       [%request-batch-rpc-loose reqs=(list [id=(unit @t) req=request:rpc:ethereum])]
       [%read-contract req=proto-read-request:rpc:ethereum]
       [%batch-read-contract-strict reqs=(list proto-read-request:rpc:ethereum)]
-      [%get-latest-block ?]
+      [%get-latest-block ?]  :: ? not really used
       [%get-block-by-number =number:block]
       [%get-tx-by-hash tx-hash=@ux]
       [%get-logs-by-hash =hash:block contracts=(list address) =topics]

@@ -29,9 +29,9 @@
 :: ;<  t5=vase  bind:m  (test-thread roller-nonce)
 :: ;<  t6=vase  bind:m  (test-thread read-contract)
 
-;<  t7=vase  bind:m  (test-thread prep-command2)
+:: ;<  t7=vase  bind:m  (test-thread prep-command2)
 
-:: ;<  t8=vase  bind:m  (test-thread eth-watcher)
+;<  t8=vase  bind:m  (test-thread eth-watcher)
 (pure:m !>(0))
 ::
 |%
