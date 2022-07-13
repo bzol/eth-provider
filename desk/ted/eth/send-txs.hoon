@@ -76,12 +76,16 @@
 ~&  [~(wyt in p.pending) 'txs awaiting confirmation']
 ::  get receipts
 ::
-;<  responses=(list response:rpc)  bind:m
-  %+  request-batch-rpc-loose:ethio  url
+;<  res=ethout:ethdata  bind:m
+  %-  eth-provider
+  :-  %request-batch-rpc-loose
   %+  turn  ~(tap in p.pending)
   |=  txh=@ux
   :-  `(crip '0' 'x' ((x-co:co 64) txh))
   [%eth-get-transaction-receipt txh]
+?>  ?=(%request-batch-rpc-loose -.res)
+=/  responses  `(list response:rpc)`+.res
+~&  '========send_txs3========'
 ::  find transactions that haven't been confirmed yet, bailing on failure
 ::
 =/  unconfirmed=(each (set @ux) [term tang])
