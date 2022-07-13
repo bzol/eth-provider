@@ -3,7 +3,7 @@
 ::    produces hex string result, for use with +decode-results:rpc:ethereum
 ::
 /-  ethdata=eth-provider
-/+  ethereum, ethio, strandio, eth-provider
+/+  ethereum, strandio, eth-provider
 =,  ethereum-types
 =,  jael
 ::

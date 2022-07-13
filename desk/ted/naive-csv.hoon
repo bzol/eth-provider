@@ -29,7 +29,6 @@
 ::
 /+  dice,
     ethereum,
-    ethio,
     naive,
     naive-tx=naive-transactions,
     *strandio

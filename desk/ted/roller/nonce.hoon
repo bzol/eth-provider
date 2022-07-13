@@ -1,7 +1,7 @@
 ::  aggregator/nonce: get next nonce
 ::
 /-  rpc=json-rpc, ethdata=eth-provider
-/+  ethereum, ethio, strandio, eth-provider
+/+  ethereum, strandio, eth-provider
 ::
 |=  args=vase
 =+  !<([endpoint=@t pk=@] args)
