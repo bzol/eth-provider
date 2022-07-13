@@ -18,17 +18,18 @@
 =/  roller-send  [%roller-send !>(['http://localhost:8545' address 0 0 pk 0 0 ~[[0 [0 0] [[~zod %spawn] [%spawn ~zod address]]]]])]
 =/  roller-nonce  [%roller-nonce !>(['http://localhost:8545' pk])]
 =/  read-contract  [%eth-read-contract !>(['http://localhost:8545' [[~ 'unitid'] address ['func' ~[[%address address]]]]])]
-=/  prep-command  [%claz-prep-command !>(['http://localhost:8545' [%generate /updates %mainnet address [%deed '{}']]])]
+=/  prep-command  [%claz-prep-command !>(['http://localhost:8545' [%generate /updates %mainnet address [%invites ~nut /~zod/base/197/out/txt]]])]  :: bad input
+=/  prep-command2  [%claz-prep-command !>(['http://localhost:8545' [%generate /updates %mainnet address [%deed '{}']]])]
 =/  eth-watcher  [%eth-watcher !>([~ [['http://localhost:8545' %.n ~h1 ~m1 0 [~ 0] ~[0x123] ~[0x123] ~[0x123]] 0 ~ ~[[[0x123 123] 0x123]]]])]
 
-;<  t=vase  bind:m  (test-thread get-timestamps)
-;<  t2=vase  bind:m  (test-thread get-tx-receipts)
+:: ;<  t=vase  bind:m  (test-thread get-timestamps)
+:: ;<  t2=vase  bind:m  (test-thread get-tx-receipts)
 :: ;<  t3=vase  bind:m  (test-thread send-txs)  ::  bad input
 :: ;<  t4=vase  bind:m  (test-thread roller-send)  :: bad input
-;<  t5=vase  bind:m  (test-thread roller-nonce)
-;<  t6=vase  bind:m  (test-thread read-contract)
+:: ;<  t5=vase  bind:m  (test-thread roller-nonce)
+:: ;<  t6=vase  bind:m  (test-thread read-contract)
 
-;<  t7=vase  bind:m  (test-thread prep-command)
+:: ;<  t7=vase  bind:m  (test-thread prep-command)
 
 ;<  t8=vase  bind:m  (test-thread eth-watcher)
 (pure:m !>(0))
