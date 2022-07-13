@@ -25,8 +25,8 @@
 
 :: ;<  t=vase  bind:m  (test-thread get-timestamps)
 :: ;<  t2=vase  bind:m  (test-thread get-tx-receipts)
-:: ;<  t3=vase  bind:m  (test-thread send-txs)  ::  bad input
-;<  t4=vase  bind:m  (test-thread roller-send)
+;<  t3=vase  bind:m  (test-thread send-txs)  ::  bad input
+:: ;<  t4=vase  bind:m  (test-thread roller-send)
 
 :: ;<  t5=vase  bind:m  (test-thread roller-nonce)
 :: ;<  t6=vase  bind:m  (test-thread read-contract)

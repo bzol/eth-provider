@@ -31,7 +31,7 @@
   :-  `(scot %ux (end [3 10] tx))
   [%eth-send-raw-transaction tx]
 ?>  ?=(%request-batch-rpc-loose -.res)
-=/  responses  +.res
+=/  responses  `(list response:rpc)`+.res
 ~&  responses
 ~&  '========send_txs2========'
 ::  parse tx hashes out of responses, bailing on submission failure
