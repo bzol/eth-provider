@@ -183,12 +183,12 @@
     (pure:m log)
   ?.  (lien batchers.pup |=(=@ux =(ux address.log)))
     (pure:m log)
-  ;<  res=transaction-result:rpc:ethereum  bind:m
-    (get-tx-by-hash:ethio url.pup transaction-hash.u.mined.log)
-  :: ;<  res2=ethout:ethdata  bind:m
-  ::   (eth-provider [%get-tx-by-hash transaction-hash.u.mined.log])
-  :: ?>  ?=(%get-tx-by-hash -.res2)
-  :: =/  res  +.res2
+  :: ;<  res=transaction-result:rpc:ethereum  bind:m
+  ::   (get-tx-by-hash:ethio url.pup transaction-hash.u.mined.log)
+  ;<  res2=ethout:ethdata  bind:m
+    (eth-provider [%get-tx-by-hash transaction-hash.u.mined.log])
+  ?>  ?=(%get-tx-by-hash -.res2)
+  =/  res  `transaction-result:rpc:ethereum`+.res2
   ~&  '===eth-provider_5==='
   (pure:m log(input.u.mined `(data-to-hex input.res)))
 ::
