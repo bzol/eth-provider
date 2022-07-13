@@ -15,6 +15,5 @@
   (eth-provider [%get-next-nonce address])
 ?>  ?=(%get-next-nonce -.res)
 =/  expected-nonce  +.res
-~&  expected-nonce
 ~&  '===roller-nonce2==='
 (pure:m !>(expected-nonce))

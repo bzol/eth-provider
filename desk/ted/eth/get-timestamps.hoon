@@ -18,9 +18,7 @@
     ;<  res2=ethout:ethdata  bind:m
       (request-blocks (scag 100 blocks))
     ?>  ?=(%request-batch-rpc-strict -.res2)
-    ~&  res2
     =/  res  +.res2
-    ~&  res
     ~&  '========get-timestamps2========'
     %_  loop
       out     (weld out (parse-results res))

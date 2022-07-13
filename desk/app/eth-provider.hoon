@@ -134,11 +134,9 @@
 ++  on-leave  on-leave:def
 ++  on-peek   
   |=  =path
-  ~&  'on-peek called!'
   ^-  (unit (unit cage))
   ?+    path  (on-peek:def path)
       [%x %get-state ~]  
-    ~&  +.state
     ``noun+!>(+.state)
   ==
 ++  on-agent

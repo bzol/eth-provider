@@ -21,7 +21,6 @@
   (request-receipts url (scag 100 tx-hashes))
 ?>  ?=(%request-batch-rpc-strict -.res2)
 =/  res  +.res2
-~&  res
 ~&  '========get-tx-receipts2========'
 %_  loop
   out        (welp out res)
