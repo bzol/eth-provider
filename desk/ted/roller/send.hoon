@@ -18,7 +18,6 @@
 ;<  res=ethout:ethdata  bind:m  (eth-provider [%get-next-nonce address])
 ?>  ?=(%get-next-nonce -.res)
 =/  expected-nonce  +.res
-:: ~&  expected-nonce
 ~&  '===roller-send2==='
 ::  Infura enforces a max calldata size (32, 64, 128 Kb?) so we calculate how
 ::  many txs are included in a batch of that size, and only send those
@@ -76,8 +75,11 @@
 ::
 =/  gas-limit=@ud  (add 22.000 (mul 16 p.batch-data))
 =/  max-cost=@ud   (mul gas-limit use-gas-price)
-;<  balance=@ud  bind:m
-  (get-balance:ethio endpoint address)
+;<  res=ethout:ethdata  bind:m
+  (eth-provider [%get-balance address])
+?>  ?=(%get-balance -.res)
+=/  balance  +.res
+~&  '===roller-send3==='
 ?:  (gth max-cost balance)
   ::  if we cannot pay for the transaction, don't bother sending it out
   ::
@@ -162,6 +164,7 @@
     [`'sendRawTransaction' %eth-send-raw-transaction batch]
   ;<  res=(list response:rpc)  bind:m
     (request-batch-rpc-loose:ethio endpoint [req]~)
+  ~&  '===roller-send4==='
   ?:  ?=([* ~] res)
     (pure:m i.res)
   %+  strand-fail:strandio
