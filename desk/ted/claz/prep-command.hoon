@@ -21,11 +21,10 @@
     ?^  err  (strand-fail:strandio %claz-pre-command u.err)
     ::  gather prerequisites
     ::
-    ~&  [%gonna-get-nonce url as.command]
     ;<  res=ethout:ethdata  bind:m
       (eth-provider [%get-next-nonce as.command])
     ?>  ?=(%get-next-nonce -.res)
-    =/  nonce  +.res
+    =/  nonce  `@ud`+.res
 ~&  '===prep-command2==='
     (pure:m !>([%nonce nonce]))
 ::
@@ -106,7 +105,7 @@
       ::TODO pass in as argument
       delegated-sending:contracts:azimuth
     (pools:cal pool ship)
-  ::;<  res3=ethout:ethdata  bind:m
+  ::;<  res2=ethout:ethdata  bind:m
   ::  %-  eth-provider
   ::  :-  %batch-read-contract-strict
   ::  %+  turn  ~(tap by counts)
@@ -116,8 +115,8 @@
   ::    ::TODO pass in as argument
   ::    delegated-sending:contracts:azimuth
   ::  (pools:cal pool ship)
-  ::?>  ?=(%batch-read-contract-strict -.res3)
-  ::=/  responses  +.res3
+  ::?>  ?=(%batch-read-contract-strict -.res2)
+  ::=/  responses  `(list [id=@t res=@t])`+.res2
   ~&  '===prep-command5==='
   ~&  responses
   =/  missing=(list [star=ship have=@ud needed=@ud])
