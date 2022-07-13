@@ -10,11 +10,12 @@
 |=  args=vase
 |^
 =+  !<([~ pup=watchpup] args)
-~&  'eth-watcher_1'
+~&  '===eth-provider==='
 =/  m  (strand:strandio ,vase)
 ^-  form:m
 ~&  '===eth-provider_1==='
 ;<  res=ethout:ethdata  bind:m  (eth-provider [%get-latest-block url.pup])
+?>  ?=(%get-latest-block -.res)
 =/  latest  +.res
 =+  last=number.id.latest-block
 ;<  pup=watchpup   bind:m  (zoom pup last (min last (fall to.pup last)))
@@ -46,6 +47,7 @@
   ~&  '===eth-provider_2==='
   ;<  res=ethout:ethdata  bind:m  ::  oldest first
     (eth-provider [%get-logs-by-hash url.pup hash.id.block contracts topics.pup])
+  ?>  ?=(%get-logs-by-hash -.res)
   =/  new  +.res
   %-  pure:m
   :-  ~
@@ -72,10 +74,11 @@
   ?:  =(parent-hash.block hash.id.i.blocks)
     (pure:m (flop vows) pup(blocks [block blocks]))
   ::  next-block: the new target block
-  ~&  '===eth-provider_3==='
   ;<  res=ethout:ethdata  bind:m
     (eth-provider [%get-block-by-number url.pup number.id.i.blocks])
+  ?>  ?=(%get-block-by-number -.res)
   =/  next  +.res
+  ~&  '===eth-provider_3==='
   =.  pending-logs.pup  (~(del by pending-logs.pup) number.id.i.blocks)
   =.  vows  [id.block vows]
   loop(block next-block, blocks t.blocks)
@@ -133,7 +136,8 @@
     number.pup
     to-number
     ==
-  =/  loglist  +res
+  ?>  ?=(%get-block-by-range -.res)
+  =/  loglist  +.res
   =?  pending-logs.pup  ?=(^ loglist)
     (~(put by pending-logs.pup) to-number loglist)
   loop(number.pup +(to-number))
@@ -177,10 +181,11 @@
     (pure:m log)
   ?.  (lien batchers.pup |=(=@ux =(ux address.log)))
     (pure:m log)
-  ~&  '===eth-provider_5==='
   ;<  res2=ethout:ethdata  bind:m
     (eth-provider [%get-tx-by-hash url.pup transaction-hash.u.mined.log])
+  ?>  ?=(%get-tx-by-hash -.res2)
   =/  res  +.res2
+  ~&  '===eth-provider_5==='
   (pure:m log(input.u.mined `(data-to-hex input.res)))
 ::
 ++  data-to-hex
