@@ -28,7 +28,7 @@
 =/  get-balance  [%get-balance address]
 
 :: ;<  res=ethout:ethdata  bind:m  (eth-provider [%get-balance address])
-;<  res=ethout:ethdata  bind:m  (eth-provider get-tx-by-hash)
+;<  res=ethout:ethdata  bind:m  (eth-provider request-batch-rpc-loose)
 :: =/  res2  !>(res)
 :: =/  res2  +<.res
 
