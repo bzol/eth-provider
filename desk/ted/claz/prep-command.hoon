@@ -46,7 +46,10 @@
   =/  m  (strand:strandio ,(unit tang))
   ^-  form:m
   ;<  responses=(list [@t @t])  bind:m
-    %+  batch-read-contract-strict:ethio  url
+  %+  batch-read-contract-strict:ethio  url
+  :: ;<  res=ethout:ethdata  bind:m
+  ::   %-  eth-provider
+  ::   :-  %batch-read-contract-strict
     %+  turn  ships
     |=  =ship
     ^-  proto-read-request:rpc
@@ -54,6 +57,8 @@
       ::TODO  argument?
       azimuth:contracts:azimuth
     (rights:cal ship)
+  :: ?>  ?=(%batch-read-contract-strict -.res)
+  :: =/  responses  `(list [@t @t])`+.res
   ~&  '===prep-command3==='
   =/  taken=(list ship)
     %+  murn  responses
@@ -92,7 +97,7 @@
         delegated-sending:contracts:azimuth
       (get-pool:cal as)
     ?>  ?=(%read-contract -.res2)
-    =/  res  +.res2
+    =/  res  `@t`+.res2
     ~&  '===prep-command4==='
     %-  pure:n
     (decode-results:rpc res [%uint]~)
