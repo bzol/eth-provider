@@ -1,7 +1,7 @@
 ::  eth-watcher: ethereum event log collector
 ::
 /-  spider, *eth-watcher, ethdata=eth-provider
-/+  strandio, ethio, azimuth, eth-provider
+/+  strandio, azimuth, eth-provider
 =,  ethereum-types
 =,  jael
 ::
@@ -183,8 +183,6 @@
     (pure:m log)
   ?.  (lien batchers.pup |=(=@ux =(ux address.log)))
     (pure:m log)
-  :: ;<  res=transaction-result:rpc:ethereum  bind:m
-  ::   (get-tx-by-hash:ethio url.pup transaction-hash.u.mined.log)
   ;<  res2=ethout:ethdata  bind:m
     (eth-provider [%get-tx-by-hash transaction-hash.u.mined.log])
   ?>  ?=(%get-tx-by-hash -.res2)
