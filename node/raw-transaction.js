@@ -2,7 +2,7 @@ const ethTx = require('ethereumjs-tx');
 
 const txParams = {
 	chainId: '0x539',
-  nonce: '0x0', // Replace by nonce for your account on geth node
+  nonce: '0x2', // Replace by nonce for your account on geth node
   gasPrice: '0x09184e72a000', 
   gasLimit: '0x30000',
   to: '0xfa3caabc8eefec2b5e2895e5afbf79379e7268a7', 
