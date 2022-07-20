@@ -31,7 +31,9 @@
 =/  get-balance  [%get-balance address]
 
 :: ;<  res=ethout:ethdata  bind:m  (eth-provider [%get-balance address])
-;<  res=ethout:ethdata  bind:m  (eth-provider request-rpc)
+;<  res=ethout:ethdata  bind:m  (eth-provider get-latest-block)
+
+
 :: =/  res2  !>(res)
 :: =/  res2  +<.res
 
