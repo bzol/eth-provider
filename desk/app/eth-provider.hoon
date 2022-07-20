@@ -78,11 +78,13 @@
         %provide
       :: Is in client or (kids active and is a kid)
       ?>  =(active.state %provider)
-      ?>  ?|  =(~ (find ~[src.bowl] clients:provider))
+      ~&  'nut provide called4!'
+      ?>  ?|  (~(has in clients:provider) src.bowl)
               ?&  kids:provider
                   =((sein:title our.bowl now.bowl src.bowl) our.bowl)
               ==
           ==
+      ~&  'nut provide called3!'
 
       =/  tid  +<.action
       :: =/  ship-tid

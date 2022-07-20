@@ -13,6 +13,7 @@
 ;<    state=state:eth-provider
     bind:m
   (scry:strandio state:eth-provider /gx/eth-provider/get-state/noun)
+~&  'lib/eth-provider called!'
 ?-  active.state
   %local
 (call-ethio eth-input active.state url.local.state)
@@ -34,6 +35,7 @@
   ;<  out=json  bind:m  (request-rpc:ethio url +.arg)
   (pure:m [%request-rpc out])
     %request-batch-rpc-strict
+  ~&  'request-batch-rpc-strict called!'
   ;<  out=(list [id=@t =json])  bind:m  (request-batch-rpc-strict:ethio url +.arg)
   (pure:m [%request-batch-rpc-strict out])
     %request-batch-rpc-loose

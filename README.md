@@ -23,5 +23,3 @@ TODO: documentaiton
 ./desk/ted/tests/eth-provider.hoon: tests the eth-provider
 ./desk/ted/tests/integration.hoon: tests the integration of eth-provider to the codebase
 ./node: for generating transactions to test the send-txs integration point
-
-# Testing provider functionality
