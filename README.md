@@ -2,13 +2,14 @@
 - desk/app/eth-provider.hoon
 - desk/sur/eth-provider.hoon
 - desk/ted/eth-provider.hoon
+- desk/lib/eth-provider.hoon
 
 
 # Using:
 - desk/lib/ethio.hoon
 - desk/lib/ethereum.hoon
 
-# Tests
+# Setting up client to provider tests
 |rein %base [& %eth-test] [& %eth-provider]
 :eth-provider &provider-action [%set-local 'http://localhost:8545']
 :eth-provider &provider-action [%set-provider ['http://localhost:8545' %.n ~]]

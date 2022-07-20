@@ -21,7 +21,6 @@
   %provider
 (call-ethio eth-input active.state url.provider.state)
   %client
-~&  'client branch taken'
 ;<  ~  bind:m  (watch:strandio /updates [client.state %eth-provider] [%updates tid.bowl ~])
 ;<  ~  bind:m  (poke:strandio [provider.client.state %eth-provider] [%provider-action !>([%provide tid.bowl eth-input])])
 ;<  =cage  bind:m  (take-fact:strandio /updates)
@@ -36,10 +35,8 @@
       client=client:eth-provider
   ==
 ++  is-client
-  :: |=  [tid=@tatid active=active:eth-provider eth-output=ethout:eth-provider]
   |=  [tid=@tatid active=active:eth-provider eth-output=ethout:eth-provider]
   =/  m  (strand ,vase)
-  :: (pure:m !>([tid eth-output]))
   ?-  active
     %local
   (pure:m !>(eth-output))
@@ -50,7 +47,6 @@
   ==
 ++  call-ethio
   |=  [arg=ethin:eth-provider active=active:eth-provider url=@ta]
-  ~&  'call-ethio called!'
   =/  m  (strand ,vase)
   ;<  =bowl:spider  bind:m  get-bowl:strandio
   ?-  -.arg
@@ -89,7 +85,6 @@
   (is-client tid.bowl active [%get-next-nonce out])
     %get-balance
   ;<  out=@ud  bind:m  (get-balance:ethio url +.arg)
-  ~&  out
   (is-client tid.bowl active [%get-balance out])
   ==
 --

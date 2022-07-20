@@ -5,7 +5,6 @@
 ::
 |=  args=vase
 =+  !<([endpoint=@t pk=@] args)
-~&  '===roller-nonce==='
 =/  m  (strand:strandio ,vase)
 ^-  form:m
 ::
@@ -15,5 +14,4 @@
   (eth-provider [%get-next-nonce address])
 ?>  ?=(%get-next-nonce -.res)
 =/  expected-nonce  +.res
-~&  '===roller-nonce2==='
 (pure:m !>(expected-nonce))

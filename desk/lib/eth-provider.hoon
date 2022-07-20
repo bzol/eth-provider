@@ -27,7 +27,6 @@
 |%
 ++  call-ethio
   |=  [arg=ethin:eth-provider active=active:eth-provider url=@ta]
-  :: =/  m  (strand ,vase)
   =/  m  (strand ,ethout:eth-provider)
   ;<  =bowl:spider  bind:m  get-bowl:strandio
   ?-  -.arg

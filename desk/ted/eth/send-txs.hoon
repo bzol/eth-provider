@@ -14,7 +14,6 @@
 ::
 |=  args=vase
 =+  !<([url=@t step-size=@ud txs=(list @ux)] args)
-~&  '========send-txs========'
 =/  m  (strand:strandio ,vase)
 ^-  form:m
 |-
@@ -32,8 +31,6 @@
   [%eth-send-raw-transaction tx]
 ?>  ?=(%request-batch-rpc-loose -.res)
 =/  responses  `(list response:rpc)`+.res
-~&  responses
-~&  '========send_txs2========'
 ::  parse tx hashes out of responses, bailing on submission failure
 ::
 =/  pending=(each (set @ux) [term tang])
@@ -85,7 +82,6 @@
   [%eth-get-transaction-receipt txh]
 ?>  ?=(%request-batch-rpc-loose -.res)
 =/  responses  `(list response:rpc)`+.res
-~&  '========send_txs3========'
 ::  find transactions that haven't been confirmed yet, bailing on failure
 ::
 =/  unconfirmed=(each (set @ux) [term tang])

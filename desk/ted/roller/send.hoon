@@ -7,7 +7,6 @@
 ^-  thread:spider
 |=  args=vase
 =+  !<(rpc-send-roll args)
-~&  '===roller-send==='
 
 =/  m  (strand:strandio ,vase)
 |^
@@ -18,7 +17,6 @@
 ;<  res=ethout:ethdata  bind:m  (eth-provider [%get-next-nonce address])
 ?>  ?=(%get-next-nonce -.res)
 =/  expected-nonce  +.res
-~&  '===roller-send2==='
 ::  Infura enforces a max calldata size (32, 64, 128 Kb?) so we calculate how
 ::  many txs are included in a batch of that size, and only send those
 ::
@@ -79,7 +77,6 @@
   (eth-provider [%get-balance address])
 ?>  ?=(%get-balance -.res)
 =/  balance  +.res
-~&  '===roller-send3==='
 ?:  (gth max-cost balance)
   ::  if we cannot pay for the transaction, don't bother sending it out
   ::
@@ -166,7 +163,6 @@
     (eth-provider [%request-batch-rpc-loose [req]~])
   ?>  ?=(%request-batch-rpc-loose -.res2)
   =/  res  `(list response:rpc)`+.res2
-  ~&  '===roller-send4==='
   ?:  ?=([* ~] res)
     (pure:m i.res)
   %+  strand-fail:strandio

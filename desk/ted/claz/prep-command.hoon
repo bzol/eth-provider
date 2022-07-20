@@ -8,7 +8,6 @@
 |=  args=vase
 =/  [url=@t =command]
   !<([@t command] args)
-~&  '===prep-command==='
 =/  m  (strand:strandio ,vase)
 ^-  form:m
 ?.  ?=(%generate -.command)  !!  ::TODO
@@ -25,7 +24,6 @@
       (eth-provider [%get-next-nonce as.command])
     ?>  ?=(%get-next-nonce -.res)
     =/  nonce  `@ud`+.res
-~&  '===prep-command2==='
     (pure:m !>([%nonce nonce]))
 ::
 ++  check-invites
@@ -57,7 +55,6 @@
     (rights:cal ship)
   ?>  ?=(%batch-read-contract-strict -.res)
   =/  responses  `(list [@t @t])`+.res
-  ~&  '===prep-command3==='
   =/  taken=(list ship)
     %+  murn  responses
     |=  [id=@t res=@t]
@@ -96,7 +93,6 @@
       (get-pool:cal as)
     ?>  ?=(%read-contract -.res2)
     =/  res  `@t`+.res2
-    ~&  '===prep-command4==='
     %-  pure:n
     (decode-results:rpc res [%uint]~)
   ;<  res=ethout:ethdata  bind:m
@@ -111,7 +107,6 @@
     (pools:cal pool ship)
   ?>  ?=(%batch-read-contract-strict -.res)
   =/  responses  `(list [id=@t res=@t])`+.res
-  ~&  '===prep-command5==='
   ::;<  res2=ethout:ethdata  bind:m
   ::  %-  eth-provider
   ::  :-  %batch-read-contract-strict
@@ -124,8 +119,6 @@
   ::  (pools:cal pool ship)
   ::?>  ?=(%batch-read-contract-strict -.res2)
   ::=/  responses  `(list [id=@t res=@t])`+.res2
-  ~&  '===prep-command5==='
-  ~&  responses
   =/  missing=(list [star=ship have=@ud needed=@ud])
     %+  murn  responses
     |=  [id=@t res=@t]

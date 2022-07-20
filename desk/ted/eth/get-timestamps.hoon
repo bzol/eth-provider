@@ -9,7 +9,6 @@
 ::
 |=  args=vase
 =+  !<([url=@t blocks=(list @ud)] args)
-~&  '========get-timestamps========'
 =/  m  (strand:strandio ,vase)
 =|  out=(list [block=@ud timestamp=@da])
 |^  ^-  form:m
@@ -19,7 +18,6 @@
       (request-blocks (scag 100 blocks))
     ?>  ?=(%request-batch-rpc-strict -.res2)
     =/  res  +.res2
-    ~&  '========get-timestamps2========'
     %_  loop
       out     (weld out (parse-results res))
       blocks  (slag 100 blocks)

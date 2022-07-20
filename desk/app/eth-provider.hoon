@@ -43,7 +43,6 @@
 ++  on-poke
   |=  [=mark =vase]
   ^-  (quip card _this)
-  ~&  'on-poke called!'
   |^
   ?+    mark  (on-poke:def mark vase)
       %provider-action
@@ -57,7 +56,6 @@
     ?-    -.action
         %set-local
       ?>  =(src.bowl our.bowl)
-      ~&  +.action
       :_  %=  state
           active  %local
           local  +.action
@@ -65,7 +63,6 @@
       ~
         %set-provider
       ?>  =(src.bowl our.bowl)
-      ~&  +.action
       :_  %=  state
           active  %provider
           provider  +.action
@@ -73,7 +70,6 @@
       ~
         %set-client
       ?>  =(src.bowl our.bowl)
-      ~&  +.action
       :_  %=  state
           active  %client
           client  +.action
@@ -81,7 +77,6 @@
       ~
         %provide
       :: Is in client or (kids active and is a kid)
-      ~&  'nut provide called!'
       ?>  =(active.state %provider)
       ?>  ?|  =(~ (find ~[src.bowl] clients:provider))
               ?&  kids:provider
@@ -93,7 +88,6 @@
       :: =/  ship-tid
       :: (crip (weld ~(rud at src.bowl) (weld "|" (trip tid))))
       =/  eth-input  +>.action
-      ~&  'nut provide called!2'
 
       =/  start-args  [~ `tid byk.bowl(r da+now.bowl) %eth-provider !>(eth-input)]
       =/  ta-now  `@ta`(scot %da now.bowl)
@@ -159,7 +153,6 @@
          %-  (slog leaf+"Thread failed: {(trip p.err)}" q.err)
          `this
            %thread-done
-         ~&  sign
          =/  res  !<([@ta ethout:eth-provider] q.cage.sign)
          :: =/  bar-index  (find "|" (trip -.res))
          :: =/  ship-num  (scan (oust [+.bar-index 100] (trip -.res)) bisk:so)
@@ -167,9 +160,6 @@
          :: =/  ship  `@p`+.ship-num
          :: =/  ta-now  `@ta`(scot %da now.bowl)
          =/  eth-output  +.res
-         ~&  "eth-output==========="
-         ~&  eth-output
-         ~&  "====================="
          :-  
          :~
          :: :: [%pass /thread/[ta-now] %agent [ship %spider] %poke %spider-input !>([tid %noun !>(eth-output)])]

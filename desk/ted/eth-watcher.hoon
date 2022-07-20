@@ -10,12 +10,10 @@
 |=  args=vase
 |^
 =+  !<([~ pup=watchpup] args)
-~&  '==eth-watcher==='
 =/  m  (strand:strandio ,vase)
 ^-  form:m
 ;<  res=ethout:ethdata  bind:m  (eth-provider [%get-latest-block %.y])
 ?>  ?=(%get-latest-block -.res)
-~&  '===eth-watcher_1==='
 ::  TODO fix this
 =/  latest-block  +.res
 :: =+  last=number.id.latest-block
@@ -46,7 +44,6 @@
   ?:  &(?=(^ blocks.pup) !=(parent-hash.block hash.id.i.blocks.pup))
     (rewind pup block)
   =/  contracts  (weld contracts.pup batchers.pup)
-  ~&  '===eth-watcher_2_deprecated==='
   ;<  res=ethout:ethdata  bind:m  ::  oldest first
     (eth-provider [%get-logs-by-hash hash.id.block contracts topics.pup])
   ?>  ?=(%get-logs-by-hash -.res)
@@ -80,7 +77,6 @@
     (eth-provider [%get-block-by-number number.id.i.blocks])
   ?>  ?=(%get-block-by-number -.res)
   =/  next-block  +.res
-  ~&  '===eth-watcher_3_deprecated==='
   =.  pending-logs.pup  (~(del by pending-logs.pup) number.id.i.blocks)
   =.  vows  [id.block vows]
   loop(block next-block, blocks t.blocks)
@@ -127,7 +123,6 @@
         ==
       500
     zoom-step
-  ~&  '===eth-watcher_4==='
   ;<  res=ethout:ethdata  bind:m  ::  oldest first
     %-  eth-provider
     :-
@@ -187,7 +182,6 @@
     (eth-provider [%get-tx-by-hash transaction-hash.u.mined.log])
   ?>  ?=(%get-tx-by-hash -.res2)
   =/  res  `transaction-result:rpc:ethereum`+.res2
-  ~&  '===eth-watcher_5==='
   (pure:m log(input.u.mined `(data-to-hex input.res)))
 ::
 ++  data-to-hex

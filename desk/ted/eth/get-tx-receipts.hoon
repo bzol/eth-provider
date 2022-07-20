@@ -10,7 +10,6 @@
 ::
 |=  args=vase
 =+  !<([url=@t tx-hashes=(list @ux)] args)
-~&  '========get-tx-receipts========'
 =/  m  (strand ,vase)
 =|  out=(list [@t json])
 |^
@@ -21,7 +20,6 @@
   (request-receipts url (scag 100 tx-hashes))
 ?>  ?=(%request-batch-rpc-strict -.res2)
 =/  res  +.res2
-~&  '========get-tx-receipts2========'
 %_  loop
   out        (welp out res)
   tx-hashes  (slag 100 tx-hashes)
