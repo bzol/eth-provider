@@ -124,8 +124,6 @@
   ::  (pools:cal pool ship)
   ::?>  ?=(%batch-read-contract-strict -.res2)
   ::=/  responses  `(list [id=@t res=@t])`+.res2
-  ~&  '===prep-command5==='
-  ~&  responses
   =/  missing=(list [star=ship have=@ud needed=@ud])
     %+  murn  responses
     |=  [id=@t res=@t]
