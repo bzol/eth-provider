@@ -1,16 +1,5 @@
 # Link to eth-provider grant
-- https://urbit.org/grants/eth-provider
-
-# Eth-provider Files
-- desk/app/eth-provider.hoon
-- desk/sur/eth-provider.hoon
-- desk/ted/eth-provider.hoon
-- desk/lib/eth-provider.hoon
-- desk/mar/ethout.hoon
-
-# Using these libraries:
-- desk/lib/ethio.hoon
-- desk/lib/ethereum.hoon
+https://urbit.org/grants/eth-provider
 
 # How To Test
 
@@ -41,10 +30,25 @@
 ### Run
 - run `-tests-integration ~` or `-tests-eth-provider ~` on ~zod
 
+# Files
 
-# Integration Point Files
-## Integration Point Files : Integration Points in File, Integration Points Tested
-## Files that have eth-provider integrations, and info on how many endpoints they have and how many of them are tested
+## Eth-provider Files
+- desk/app/eth-provider.hoon
+- desk/sur/eth-provider.hoon
+- desk/ted/eth-provider.hoon
+- desk/lib/eth-provider.hoon
+- desk/mar/ethout.hoon
+
+## Using these libraries:
+- desk/lib/ethio.hoon
+- desk/lib/ethereum.hoon
+
+## Integration Point Files
+
+Integration Point Files : Integration Points in File, Integration Points Tested
+
+Files that have eth-provider integrations, and info on how many endpoints they have and how many of them are tested
+
 - ted/eth/get-timestamps.hoon : 1,1
 - ted/eth/get-tx-receipts.hoon : 1,1
 - ted/eth/send-txs.hoon : 2,0
