@@ -12,7 +12,7 @@ https://urbit.org/grants/eth-provider
 ## Test locally
 - start eth-provider with `|rein %base [& %eth-provider]`
 - set ethereum endpoint: `:eth-provider &provider-action [%set-local 'http://localhost:8545']`
-- (optional) start local ethereum node `./geth.sh`
+- (optional) start local ethereum node `./geth.sh` (we are using a local ethereum node)
 - run `-tests-integration ~` or `-tests-eth-provider ~`
 
 ## Testing client->provider
@@ -25,7 +25,7 @@ https://urbit.org/grants/eth-provider
 - create ~nut fake ship
 - replace %base desk with ./desk folder
 - start eth-provider with `|rein %base [& %eth-provider]`
--set ~nut ship as provider: `set :eth-provider &provider-action [%set-provider ['http://localhost:8545' %.n ~]]`
+-set ~nut ship as provider: `:eth-provider &provider-action [%set-provider ['http://localhost:8545' %.n `(set @)`(silt ~[~zod ~nut])]]`
 
 ### Run
 - run `-tests-integration ~` or `-tests-eth-provider ~` on ~zod
