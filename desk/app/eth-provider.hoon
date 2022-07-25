@@ -24,7 +24,8 @@
 ::
 ++  on-init
   ^-  (quip card _this)
-  =/  init-state  [%0 %local 'http://localhost:8545' ['http://localhost:8545' %.n ~] ~zod]
+  =/  init-state  
+  [%0 %local 'http://localhost:8545' ['http://localhost:8545' %.n ~] ~zod]
   :-  ~
   this(state init-state)
 ::
@@ -90,19 +91,24 @@
               ==
           ==
       ~&  'nut provide called3!'
-
       =/  tid  +<.action
-      :: =/  ship-tid
-      :: (crip (weld ~(rud at src.bowl) (weld "|" (trip tid))))
       =/  eth-input  +>.action
       ~&  'nut provide called!2'
-
-      =/  start-args  [~ `tid byk.bowl(r da+now.bowl) %eth-provider !>(eth-input)]
+      =/  start-args  
+      [~ `tid byk.bowl(r da+now.bowl) %eth-provider !>(eth-input)]
       =/  ta-now  `@ta`(scot %da now.bowl)
       :_  state
       :~
-          [%pass /thread/[ta-now] %agent [our.bowl %spider] %watch /thread-result/[tid]]
-          [%pass /thread/[ta-now] %agent [our.bowl %spider] %poke %spider-start !>(start-args)]
+          :*
+          %pass   /thread/[ta-now] 
+          %agent  [our.bowl %spider] 
+          %watch  /thread-result/[tid]
+          ==
+          :*
+          %pass   /thread/[ta-now] 
+          %agent  [our.bowl %spider]  
+          %poke   %spider-start  !>(start-args)
+          ==
       ==
         %set-kids
       ?>  =(src.bowl our.bowl)
@@ -130,7 +136,6 @@
   ^-  (quip card _this)
   ?+    path  (on-watch:def path)
       [%updates @ ~]
-    :: ?>  (~(has in friends) src.bowl)
     :_  this  ~
   ==
 ++  on-leave  on-leave:def
@@ -163,19 +168,12 @@
            %thread-done
          ~&  sign
          =/  res  !<([@ta ethout:eth-provider] q.cage.sign)
-         :: =/  bar-index  (find "|" (trip -.res))
-         :: =/  ship-num  (scan (oust [+.bar-index 100] (trip -.res)) bisk:so)
-         :: =/  tid  (crip (oust [0 (add 1 +.bar-index)] (trip -.res)))
-         :: =/  ship  `@p`+.ship-num
-         :: =/  ta-now  `@ta`(scot %da now.bowl)
          =/  eth-output  +.res
          ~&  "eth-output==========="
          ~&  eth-output
          ~&  "====================="
          :-  
          :~
-         :: :: [%pass /thread/[ta-now] %agent [ship %spider] %poke %spider-input !>([tid %noun !>(eth-output)])]
-         :: [%pass /thread/[ta-now] %agent [ship %spider] %poke %spider-input !>([tid %noun !>(134)])]
          [%give %fact ~[[%updates -.res ~]] %ethout !>(eth-output)]
          ==
          this
