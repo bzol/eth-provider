@@ -31,8 +31,6 @@
   |=  [url=@ta reqs=(list [id=(unit @t) req=request:rpc:ethereum])]
   |^  %+  (retry:strandio results)
         `10
-      :: ~|  'sample error message'
-      :: ~!  attempt-request
       attempt-request
   ::
   +$  results  (list [id=@t =json])

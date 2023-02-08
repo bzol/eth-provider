@@ -14,10 +14,10 @@
 |^  ^-  form:m
     =*  loop  $
     ?:  =(~ blocks)  (pure:m !>(out))  ::TODO  TMI
-    ;<  res2=ethout:ethdata  bind:m
+    ;<  res  bind:m
       (request-blocks (scag 100 blocks))
-    ?>  ?=(%request-batch-rpc-strict -.res2)
-    =/  res  +.res2
+    :: ?>  ?=(%request-batch-rpc-strict -.res2)
+    :: =/  res  +.res2
     %_  loop
       out     (weld out (parse-results res))
       blocks  (slag 100 blocks)
@@ -25,9 +25,8 @@
 ::
 ++  request-blocks
   |=  blocks=(list @ud)
-  %-  eth-provider
+  %-  request-batch-rpc-strict:eth-provider
   :*
-      %request-batch-rpc-strict  
       :: url
       :: [[~ 'u_tid'] [%eth-block-number ~]]
       %+  turn  blocks

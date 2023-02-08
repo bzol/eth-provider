@@ -1,5 +1,7 @@
 const ethTx = require('ethereumjs-tx');
 
+// "geth account new" for creating a new account
+
 const txParams = {
 	chainId: '0x539',
   nonce: '0x0', // Replace by nonce for your account on geth node
