@@ -19,6 +19,6 @@ var password = "password";
 var params = { keyBytes: 32, ivBytes: 16 };
 
 var dk = keythereum.create(params);
-console.log(dk.privateKey);
+console.log(dk.privateKey.toString('hex'));
 var keyObject = keythereum.dump(password, dk.privateKey, dk.salt, dk.iv);
 keythereum.exportToFile(keyObject);

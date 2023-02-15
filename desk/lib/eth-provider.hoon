@@ -6,36 +6,78 @@
 |%
 ++  request-rpc
   |=  [id=(unit @t) req=request:rpc:ethereum]
+  =/  m  (strand:strandio ,json)
+  ;<  out=ethout:eth-provider  bind:m
   (select-provider-mode [%request-rpc [id req]])
+  ?>  ?=(%request-rpc -.out)
+  =+  `json`+.out
+  (pure:m -)
 ++  request-batch-rpc-strict
   |=  reqs=(list [id=(unit @t) req=request:rpc:ethereum])
+  =/  m  (strand:strandio ,(list [id=@t =json]))
+  ;<  out=ethout:eth-provider  bind:m
   (select-provider-mode [%request-batch-rpc-strict reqs])
+  ?>  ?=(%request-batch-rpc-strict -.out)
+  =+  `(list [id=@t =json])`+.out
+  (pure:m -)
 ++  request-batch-rpc-loose
   |=  reqs=(list [id=(unit @t) req=request:rpc:ethereum])
+  =/  m  (strand:strandio ,(list response:json-rpc))
+  ;<  out=ethout:eth-provider  bind:m
   (select-provider-mode [%request-batch-rpc-loose reqs])
+  ?>  ?=(%request-batch-rpc-loose -.out)
+  =+  `(list response:json-rpc)`+.out
+  (pure:m -)
+++  read-contract
+  |=  req=proto-read-request:rpc:ethereum
+  =/  m  (strand:strandio ,@t)
+  ;<  out=ethout:eth-provider  bind:m
+  (select-provider-mode [%read-contract req])
+  ?>  ?=(%read-contract -.out)
+  =+  `@t`+.out
+  (pure:m -)
 ++  batch-read-contract-strict
   |=  reqs=(list proto-read-request:rpc:ethereum)
+  =/  m  (strand:strandio ,(list [@t res=@t]))
+  ;<  out=ethout:eth-provider  bind:m
   (select-provider-mode [%batch-read-contract-strict reqs])
+  ?>  ?=(%batch-read-contract-strict -.out)
+  =+  `(list [@t res=@t])`+.out
+  (pure:m -)
 ++  get-latest-block
   |=  bool=?
   =/  m  (strand ,block)
-  ;<  out2=ethout:eth-provider  bind:m
+  ;<  out=ethout:eth-provider  bind:m
   (select-provider-mode [%get-latest-block bool])
-  ~&  out2
-  ::
-  ;<  out=block  bind:m  (get-latest-block:ethio 'http://localhost:8545')
-  (pure:m out)
+  ?>  ?=(%get-latest-block -.out)
+  =+  `block`+.out
+  (pure:m -)
   :: (select-provider-mode [%get-latest-block bool])
 ++  get-block-by-number
   =,  jael
   |=  =number:block
+  =/  m  (strand:strandio ,block)
+  ;<  out=ethout:eth-provider  bind:m
   (select-provider-mode [%get-block-by-number number])
+  ?>  ?=(%get-block-by-number -.out)
+  =+  `block`+.out
+  (pure:m -)
 ++  get-tx-by-hash
   |=  tx-hash=@ux
+  =/  m  (strand:strandio ,transaction-result:rpc:ethereum)
+  ;<  out=ethout:eth-provider  bind:m
   (select-provider-mode [%get-tx-by-hash tx-hash])
+  ?>  ?=(%get-tx-by-hash -.out)
+  =+  `transaction-result:rpc:ethereum`+.out
+  (pure:m -)
 ++  get-logs-by-hash
   |=  [=hash:block contracts=(list address) =topics:eth-provider]
+  =/  m  (strand:strandio ,(list event-log:rpc:ethereum))
+  ;<  out=ethout:eth-provider  bind:m
   (select-provider-mode [%get-logs-by-hash hash contracts topics])
+  ?>  ?=(%get-logs-by-hash -.out)
+  =+  `(list event-log:rpc:ethereum)`+.out
+  (pure:m -)
 ++  get-logs-by-range
   |=  $:  
           contracts=(list address)
@@ -43,13 +85,28 @@
           from=number:block
           to=number:block
       ==
+  =/  m  (strand:strandio ,(list event-log:rpc:ethereum))
+  ;<  out=ethout:eth-provider  bind:m
   (select-provider-mode [%get-logs-by-range contracts topics from to])
+  ?>  ?=(%get-logs-by-range -.out)
+  =+  `(list event-log:rpc:ethereum)`+.out
+  (pure:m -)
 ++  get-next-nonce
   |=  =address
+  =/  m  (strand:strandio ,@ud)
+  ;<  out=ethout:eth-provider  bind:m
   (select-provider-mode [%get-next-nonce address])
+  ?>  ?=(%get-next-nonce -.out)
+  =+  `@ud`+.out
+  (pure:m -)
 ++  get-balance
   |=  =address
+  =/  m  (strand:strandio ,@ud)
+  ;<  out=ethout:eth-provider  bind:m
   (select-provider-mode [%get-balance address])
+  ?>  ?=(%get-balance -.out)
+  =+  `@ud`+.out
+  (pure:m -)
 ::
 ++  select-provider-mode
   =,  strand=strand:spider
